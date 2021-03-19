@@ -29,9 +29,9 @@ The pipeline consist of several steps that determine the interpretation of the e
       -  Spatially regularized component analysis
    - Parcel based. Analysis per parcel.
 5. Visualization
-   - Voxel based ([Example](https://sg-kitware.shinyapps.io/Ances-HAND-GM))<br/>
+   - Voxel based ([Example](https://sg-kitware.shinyapps.io/OASIS-1-GM))<br/>
      Displays correlation of features images to variables at each voxel
-   - Component based ([Example](https://sg-kitware.shinyapps.io/Ances-HAND-GM-Components))<br/>
+   - Component based ([Example](https://sg-kitware.shinyapps.io/OASIS-1-GM-Components))<br/>
      Displays statistical models on projection of feature images to components.
      Interactive selection of statistical models.Currently supported:
      - Correlation
@@ -39,7 +39,7 @@ The pipeline consist of several steps that determine the interpretation of the e
      - Elastic net
      - Liner model per parcel
      - User defined through primitive scripting
-   - Parcel based ([Example](https://sg-kitware.shinyapps.io/Ances-HAND-GM-Parcels))<br/>
+   - Parcel based ([Example](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels))<br/>
      Displays statistical models on “projection” of feature images to parcels (sum of voxel intensities per parcel) .
      Interactive selection of statistical models. Currently supported:
      - Correlation
@@ -89,14 +89,8 @@ Outputs:
 For an example to account for jacobian changes see:
 [run-example.py](../python/run-example.py)
 
-For an example to process additional modalities:
-[run-ances.py](../python/run-ances.py)
-
-
 ### Ants DWI feature extraction
 To be done.
-
-Currently used in run-ances.R.
 
 Should be moved into a separate script that can be run on each image and be used as default if DWI images are supplied.
 
