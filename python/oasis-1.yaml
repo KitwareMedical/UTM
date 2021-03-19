@@ -1,0 +1,151 @@
+#Base folde for storing results and intermeidates
+workingfolder: "./example/results"
+#Where should standard out be directed
+progresspipe: ""
+#Numbe of parallel processors to use
+nparallel: 16
+
+#atlas.Rdata file that matches atlas used for registration
+#of the image data set. Required for parcel based analysis.
+#Used in visualizations if avilable.
+#
+#The atlas R data file contains a list named atlas with
+# atlas$bg.image - array of MRI image
+# atlas$label.image - array of dame size as bg.image with label index for each voxel
+# atlas$labels - names for each index
+#(see "../Atlas/sri24/labels/atlas.Rdata used as default)
+#
+#if not to be used set use to OFF
+atlas:
+  use: ON
+  file: ""
+
+#Run setup stage
+setup:
+  use: ON
+
+#Run barycenter computation
+barycenters:
+  use: OFF
+  #Barycenter to compute, Euclidean or Wasserstein
+  type: "Wasserstein"
+  #Where to store results relative to working folder
+  folder: "Barycenter"
+  #Sparsity for euclidean mean. Remove pixel with less than
+  #0.3 of maximal average intensity. The number of pixels
+  #in the average affects transport computation times
+  sparsity: 0.3
+
+#Run optimal transport computation
+#this is required when using utm features
+#but only needs to be recomputed if the input
+#images changed
+transport:
+  use: OFF
+  #folders for intermeidate compuation results
+  #relative to workingfolder
+  pointsfolder: "Points"
+  gmrafolder: "GMRA"
+  #folder for stroing final transport computatipon results
+  #relative to working folder
+  transportfolder: "TransportMaps"
+  #Optimal transport mode [default=3]: \n
+  #    0 - Balanced (equalizes source and target mass)
+  #    1 - Add mass (Only allow addition of mass in soutrce or target)
+  #    2 - Subtract mass (Only allow subtraction of mass in source or target)
+  #    3 - Match source mass (Add or subtract in source to match target)
+  #    4 - Free (Add or subtract mass anywhere)
+  #    5 - Free source only (Add or subtract mass in source only)
+  massbalancing: 3
+  #Cost for adding mass, this adds a trade of between
+  #transporting mass or adding mass
+  #thus mass is only transported if it is cheaper
+  #than allocation or removing mass
+  #Cost effectively acts as a radius for within
+  #transportation is prefered to mass allocation
+  cost: 0
+  degree: 2
+
+#Features to compute
+features:
+  folder: "Features"
+  #Convolutional optimal transport does not require transport
+  #computation above
+  #(https://arxiv.org/abs/1607.05816)
+  #
+  #(Processing/conv.transport.R)
+  conv:
+    use: ON
+    folder: "Conv"
+    #entropy regulariztion
+    sigma: 1
+    #how closely to match source distribution
+    lambda.mean: 10
+    #how closely to match target distribution
+    lambda.target: 100
+    #number of iterations
+    iterations: 10
+  #Classical vbm (smoothed input images)
+  vbm:
+    use: ON
+    folder: "VBM"
+    #smooth intensity images
+    sigma: 0.75
+  #unbalanced optimal transport requires transport
+  #computation from above
+  #
+  #(Processing/)
+  utm:
+    use: OFF
+    folder: "UTM"
+    #Smooth mass allocation and transport feature images
+    sigma: 0.75
+
+
+#Analysis steps to perform
+analysis:
+  folder: "Analysis"
+  correlation:
+    use: ON
+    permutations: 5000
+    n.chunks: 50000
+  #Run principal compnent and spatially regularized
+  #component analysis see
+  #(https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
+  components:
+    use: OFF
+    #Number of components for PCA
+    ncomponents: 5
+    #Number of components for spatially regularized component
+    #analysis
+    ncomponents.reg: 5
+    #psoitive l1 regualrization term
+    lambda.pos: 0.001
+    #negative regularization term
+    lambda.neg: 0.5
+    #number of iterations
+    n.iters: 5
+    #step size per iteratiom
+    step: 0.1
+    #Not used currently
+    kappa: 0.001
+    #
+    sigma: 1
+  #Parcel based analysis requires atlas file
+  parcels:
+    use: ON
+  #Morse-Smale parcel computation and analysis
+  ms.parcels:
+    use: ON
+    n.components: 40
+    pLevelP: 0.2
+
+report:
+  use: OFF
+  #p-value threshold for generating images in report
+  threhsold: 0.05
+  #Extract slice for report at location x [between 0 and 1]
+  axial: 0.4
+  sagittal: 0.4
+  coronal: 0.4
+

@@ -1,0 +1,29 @@
+load("/Users/sam/Research/Projects/UTM/Atlas/sri24/labels/atlas.Rdata")
+image(atlas$bg.image[,,120])
+image(apply(atlas$bg.image[,,120], rev, 2))
+image(sapply(atlas$bg.image[,,120], rev, 2))
+image(apply(atlas$bg.image[,,120], 2, rev))
+image(atlas$bg.image[,,120])
+image(atlas$label.image[,,120])
+image(atlas$label.image[,,120])
+image(atlas$bg.image[,,120])
+image(atlas$label.image[,,120])
+image(apply(atlas$bg.image[,,120], 2, rev))
+at = apply(atlas$bg.image, 2, rev)
+image(at[,,20])
+image(at[,,20])
+atlas = apply(atlas$bg.image, 2, rev)
+dim(atlas)
+dim(atlas)
+?apply
+?rev
+load("/Users/sam/Research/Projects/UTM/Atlas/sri24/labels/atlas.Rdata")
+at = atlas$bg.image[,rev(1:dim(atlas$bg.image)[2], ]
+at = atlas$bg.image[,rev(1:dim(atlas$bg.image)[2]), ]
+dim(at)
+image(at[,,120])
+at = atlas$bg.image[rev(1:dim(atlas$bg.image)[1]),, ]
+image(at[,,120])
+image(at[,,120])
+image(apply(atlas$bg.image[,,120], 2, rev))
+load("/Users/sam/Research/Projects/UTM/python/example/results/variables.Rdata")

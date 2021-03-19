@@ -1,0 +1,10 @@
+load("/Users/sam/Research/Projects/UTM/Scripts/Shiny/oasis-atlas.Rdata")
+ls()
+atlas
+dim(atlas)
+dim(labels)
+labels
+summary(labels)
+nrow(labels)
+ncol(labels)
+dim(atlas)
