@@ -431,10 +431,13 @@ plot.slice <- function( im, p.im, feature, c.max, transparency,
 }
 
 get.max.color <- function(im){
+  c.max = 0
+  try({
   c.max = max( abs(im), na.rm=T )
   if( is.infinite( c.max ) ){
     c.max = 0
   }
+  })
   c.max
 }
 
@@ -573,7 +576,7 @@ server <- function(input, output, session) {
        index = which( cvar == var.names)
        df[ variables[[index]]$name ] = variables[[index]]$values
     }
-    res = list(df=df, nx=nx, f.index=f.index)
+    res = list(df=complete.cases(df), nx=nx, f.index=f.index)
     try({
       input$eval
       isolate(eval(parse(text=input$code)))
