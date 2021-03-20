@@ -548,10 +548,12 @@ server <- function(input, output, session) {
     image = array(NA, dim=im.dim )
     p.image = array(1, dim=im.dim)
     for(i in 1:length(label.index)){
+      try({
       if( !is.na(estimates$coef[i] ) ){
         image[ parcels$ilist[[i]]$index ] = estimates$coef[i]
         p.image[ parcels$ilist[[i]]$index ] = estimates$p.values[i]
       }
+      })
     }
     list( image=image, p.image=p.image )
   })
@@ -600,7 +602,7 @@ server <- function(input, output, session) {
 
   observe.fitted <- observe({
     try({
-    i.max = signif(max(abs(fitted()$estimates$coef), na.rm=T), 3)
+    i.max = signif(get.max.color( fitted()$estimates$coef ), 3)
     updateSliderInput(session, "threshold", max=i.max, step=i.max/100, value=0)
     })
   })
