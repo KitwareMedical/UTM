@@ -74,7 +74,7 @@ load( config$variablesfile )
 parcels.tmp = list()
 for(f in config$parcels.file){
   try({
-    load( f);
+    load( f)
     if( length(parcels.tmp) == 0 ){
       parcels.tmp = parcels
     }else{
@@ -464,11 +464,13 @@ server <- function(input, output, session) {
     if(length(input$model) == 0){
       model$name <- "Correlation"
       for(i in 2:ncol(df)){
+        try({
         x = df[,i]
         y = as.numeric(df$y)
         corr <- cor.test(x, y, method=input$corr.type)
         model$estimates$coef[i-1] = corr$estimate
         model$estimates$p.values[i-1] = corr$p.value
+        })
       }
     }
     else if(input$model == "Joint Linear"){
@@ -566,7 +568,10 @@ server <- function(input, output, session) {
     f.index = which( parcels$names == input$feature )
     v.index = which( var.names == input$variable )
     var <- variables[[v.index]]
-    df <- data.frame( y=var$values, scale(parcels$projections[[f.index]])  )
+    sproj = scale(parcels$projections[[f.index]])
+    sproj[is.na(sproj)] = 0
+    df <- data.frame( y=var$values,  sproj)
+
     nx <- ncol(df)
 
     if(input$family == "binomial"){
@@ -576,7 +581,7 @@ server <- function(input, output, session) {
        index = which( cvar == var.names)
        df[ variables[[index]]$name ] = variables[[index]]$values
     }
-    res = list(df=complete.cases(df), nx=nx, f.index=f.index)
+    res = list(df=df[complete.cases(df$y),], nx=nx, f.index=f.index)
     try({
       input$eval
       isolate(eval(parse(text=input$code)))
@@ -701,7 +706,7 @@ server <- function(input, output, session) {
 
       im  <- fitted.image()$image
       im[is.na(im)] = 0
-      vmax = max(abs(im))
+      vmax = get.max.color(im)
       t.index <- which( abs( im ) <= input$threshold )
       im[ t.index ] <- 0
       pim  <- fitted.image()$p.image

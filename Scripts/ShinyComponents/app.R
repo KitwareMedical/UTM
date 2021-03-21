@@ -501,11 +501,13 @@ server <- function(input, output, session) {
     if(length(input$model) == 0){
       model$name <- "Correlation"
       for(i in 2:ncol(df)){
+        try({
         x = df[,i]
         y = as.numeric(df$y)
         corr <- cor.test(x, y, method=input$corr.type)
         model$estimates$coef[i-1] = corr$estimate
         model$estimates$p.values[i-1] = corr$p.value
+        })
       }
     }
     else if(input$model == "Joint Linear"){
@@ -596,25 +598,28 @@ server <- function(input, output, session) {
     f.index = which( feature.names == input$feature)
     var <- variables[[v.index]]
     if(input$component == "PCA"){
-      df <-data.frame( y=var$values, x=scale( t(pcs$projections[[f.index]]) ))
+      aproj = scale( t(pcs$projections[[f.index]]) )
       comps = pcs$components[[f.index]]
       dims = pcs$dimension[[f.index]]
     }
     else if( input$component == "SpatCA"){
-      df <-data.frame( y=var$values, x=scale( t(reg.pcs$projections[[f.index]])) )
+      sproj =scale( t(reg.pcs$projections[[f.index]]))
       comps = reg.pcs$components[[f.index]]
       dims = reg.pcs$dimension[[f.index]]
     }
     else if( input$component == "Morse-Smale" ){
-      df <- data.frame( y=var$values, x=scale( ms.comps$projections[[f.index]]) )
+      sproj = scale( ms.comps$projections[[f.index]])
       comps = ms.comps$components[[f.index]]
       dims  = ms.comps$dimensions[[f.index]]
     }
     else{
-      df <- data.frame( y=var$values, x=scale( ms.comps$projections2[[f.index]]) )
+      sproj =scale( ms.comps$projections2[[f.index]])
       comps = ms.comps$components2[[f.index]]
       dims  = ms.comps$dimensions[[f.index]]
     }
+
+    sproj[is.na(sproj)] = 0
+    df <- data.frame( y=var$values, x=sproj)
     nx <- ncol(df)
     rownames(comps) = sprintf("Comp%.2d", 1:(nx-1))
     colnames(df) = c( "y", rownames(comps) )
@@ -625,7 +630,7 @@ server <- function(input, output, session) {
        index = which( cvar == var.names)
        df[ variables[[index]]$name ] = scale(variables[[index]]$values)
     }
-    res = list(df=complete.cases(df), nx=nx, comps=comps, dim=dims)
+    res = list(df=df[complete.cases(df$y),], nx=nx, comps=comps, dim=dims)
     try({
       input$eval
       isolate(eval(parse(text=input$code)))
