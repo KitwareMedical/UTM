@@ -330,9 +330,6 @@ plot.slice <- function(variable, feature, maxcor, transparency,
     vline = (slice[2] - 0.5) / d[2]
     hline = (slice[3] - 0.5) / d[3]
   }
-  if( background != "Atlas" ){
-    bg <- 0.9*bg/max(bg) + 0.1*(mask)
-  }
   tim = tim * mask
 
   par(mar=c(0,0,0,0))
