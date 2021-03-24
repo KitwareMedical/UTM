@@ -9,10 +9,8 @@ library(mmand, quietly=TRUE)
 
 compute.transport.barycenter <- function(config){
 
-gmra.file.pattern = config$transport$gmrafilebase
 barycenter.ot.discrete.file = config$barycenters$otdiscrete
 barycenter.ot.file = config$barycenters$ot
-trp.file.path = config$transport$filepattern
 barycenter.euclidean.file = config$barycenters$euclidean
 barycenter.solution.file = config$barycenters$otsolution
 transport.type = config$transport$massbalancing
@@ -21,13 +19,15 @@ p.degree = config$transport$degree
 points.file.pattern <- config$transport$pointsfilepattern
 n.parallel <- config$nparallel
 
+load(config$variablesfile)
+
 barycenter.ot.gmra.file <-
   sprintf("%s.gmra", file_path_sans_ext( barycenter.ot.file ) )
 barycenter.ot.discrete.gmra.file <-
   sprintf("%s.gmra", file_path_sans_ext( barycenter.ot.discrete.file ) )
-gmra.files <- list.files(dirname(gmra.file.pattern),
-                         basename(gmra.file.pattern), full.names=TRUE )
-trp.files <- sprintf( trp.file.path, 1:length(gmra.files) )
+
+gmra.files <- sprint("%s/%s.gmra", config$transport$gmrafolder, file.names)
+trp.files <- sprintf("%s/%s.Rdata", config$transport$transportffolder, file.names)
 
 load( barycenter.euclidean.file )
 dims = dim(barycenter$image)

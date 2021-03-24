@@ -28,7 +28,7 @@ setup:
 barycenters:
   use: OFF
   #Barycenter to compute, Euclidean or Wasserstein
-  type: "Wasserstein"
+  type: "Euclidean"
   #Where to store results relative to working folder
   folder: "Barycenter"
   #Sparsity for euclidean mean. Remove pixel with less than
@@ -42,6 +42,7 @@ barycenters:
 #images changed
 transport:
   use: ON
+  recompute: OFF
   #folders for intermeidate compuation results
   #relative to workingfolder
   pointsfolder: "Points"
@@ -113,7 +114,7 @@ analysis:
   #component analysis see
   #(https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
   components:
-    use: On
+    use: OFF
     #Number of components for PCA
     ncomponents: 5
     #Number of components for spatially regularized component

@@ -11,7 +11,6 @@ vbm.features <- function(config){
 
 barycenter.file = config$barycenters$euclidean
 images.path = config$imagefolder
-vbm.file.pattern = config$features$vbm$filepattern
 var.table <- config$variables
 sigma = config$features$vbm$sigma
 weight.sigma = 0
@@ -69,7 +68,9 @@ foreach(i=1:length(vars$name), .combine="+",
 
 
   image.file <- sprintf("%s/%s", images.path, vars$name[i])
-  print(image.file)
+  if(!file.exists(image.file)){
+    next
+  }
   image <- load.image(image.file)
   mean <- barycenter$image #orig.image
   #vbm.allocation <- convolutionalWasserstein(mean, image, 1, 20)
@@ -125,7 +126,9 @@ foreach(i=1:length(vars$name), .combine="+",
 
   features = list(#vbmallocation = vbm.allocation,
                   vbm = vbm )
-  save( features, file = sprintf(vbm.file.pattern, i) )
+  file.name = basename(file_path_sans_ext(image.file))
+  vbm.file = sprintf("%s/%s.Rdata", config$features$vbm$folder, file.name)
+  save( features, file = vbm.file )
 
   NULL
 

@@ -12,7 +12,6 @@ convolutional.transport.features <- function(config){
 
 barycenter.file = config$barycenters$euclidean
 images.path = config$imagefolder
-conv.file.pattern = config$features$conv$filepattern
 var.table = config$variables
 conv.sigma = config$features$conv$sigma
 conv.lambda1 = config$features$conv$lambda.mean
@@ -100,6 +99,9 @@ foreach(i=1:length(vars$name), .combine="+",
 
 
   image.file <- sprintf("%s/%s", images.path, vars$name[i])
+  if( !file.exists(image.file)){
+    return(NULL)
+  }
   image <- load.image(image.file)
   mean <- barycenter$image #orig.image
 
@@ -108,7 +110,9 @@ foreach(i=1:length(vars$name), .combine="+",
                                      conv.iterations)
 
   features = list(convolutional = convw)
-  save( features, file = sprintf(conv.file.pattern, i), compress=FALSE )
+  file.name = basename(file_path_sans_ext(image.file))
+  conv.file = sprintf("%s/%s.Rdata", config$features$conv$folder, file.name)
+  save( features, file = conv.file, compress=FALSE )
 
   NULL
 

@@ -188,13 +188,10 @@ output_folder = args.output_folder
 preprocess_folders = {
  "white" : "{0}/white".format(output_folder),
  "gray"  : "{0}/gray".format(output_folder),
- "csf"   : "{0}/csf".format(output_folder),
  "white_affine" : "{0}/white_affine".format(output_folder),
  "gray_affine"  : "{0}/gray_affine".format(output_folder),
- "csf_affine"   : "{0}/csf_affine".format(output_folder),
  "white_oasis" : "{0}/white_oasis".format(output_folder),
  "gray_oasis"  : "{0}/gray_oasis".format(output_folder),
- "csf_oasis"   : "{0}/csf_oasis".format(output_folder)
 }
 
 intermediate_folders = {

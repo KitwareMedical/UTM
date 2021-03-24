@@ -14,7 +14,7 @@ load( config$atlas$file )
 
 load( variables.path )
 feature.folders <- list.dirs(features.folder, full.names=TRUE, recursive=FALSE)
-files <- list.files(feature.folders[[1]], full.names=TRUE)
+files <- sprintf("%s/%s.Rdata", feature.folders[[1]], file.names)
 load( files[[1]] )
 
 shape = dim(features[[1]])
@@ -35,7 +35,7 @@ for(i in 1:length(ulabels)){
 
 for( k in 1:length(feature.folders) ){
   print(basename(feature.folders[[k]]) )
-  files <- list.files(feature.folders[[k]], full.names=TRUE)
+  files <- sprintf("%s/%s.Rdata", feature.folders[[k]], file.names)
   n.points = length(files)
   parcel.projection <- list()
   dims <- list()

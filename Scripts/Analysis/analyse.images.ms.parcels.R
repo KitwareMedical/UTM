@@ -97,9 +97,10 @@ morse.smale.components = function(files, n.components){
        dimensions=lapply(variances, dim), names=names(features))
 }
 
+load(config$variablesfile)
 feature.folders <- list.dirs(features.folder, full.names=TRUE, recursive=FALSE)
 for( k in 1:length(feature.folders) ){
-  files <- list.files(feature.folders[[k]], full.names=TRUE)
+  files <- sprintf("%s/%s.Rdata", feature.folders[[k]], file.names)
   ms.comps <- morse.smale.components(files, n.components )
   ms.comps.file = sprintf( "%s/%s-ms.Rdata",
                       save.path, basename(feature.folders[[k]]) )

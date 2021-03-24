@@ -7,16 +7,24 @@ args <- commandArgs(trailingOnly = TRUE)
 
 massCost = as.integer( args[1] )
 transport.type = as.integer( args[2] )
-gmra.file.pattern = args[3]
+gmra.folder = args[3]
 barycenter.file = args[4]
-transport.map.file.pattern = args[5]
+transport.folder = args[5]
 p.degree = as.integer( args[6] )
-points.file.pattern = args[7]
-index = as.integer( args[8] )
+points.folder = args[7]
+recompute = as.logical(args[8])
+file.name = args[9]
 
-gmra.file <- sprintf(gmra.file.pattern, index)
+gmra.file <- sprintf("%s/%s.gmra", gmra.folder, file.name)
+points.file <- sprintf("%s/%s.Rdata", points.folder, file.name)
+trp.file <- sprintf("%s/%s.Rdata", transport.folder, file.name)
+if( !recompute & file.exists(trp.file) ){
+  q()
+}
+
 load( barycenter.file )
-load( sprintf(points.file.pattern, index ) )
+#needed for point weights (x.weights)
+load( points.file )
 
 trp.lp <- multiscale.transport.create.lp( oType = 31, transport.type=transport.type,
                                           massCost=massCost )
@@ -36,6 +44,5 @@ from = trp$from[[k]]
 to = trp$to[[k]]
 cost = trp$cost
 map = trp$map[[k]]
-save( fromMass, from, toMass, to, cost, map,
-      file = sprintf(transport.map.file.pattern, index) )
+save( fromMass, from, toMass, to, cost, map, file = trp.file )
 

@@ -10,7 +10,7 @@ setup.utm <- function(config){
 images.path         <- config$imagefolder
 var.table           <- config$variables
 var.file            <- config$variablesfile
-points.file.path    <- config$transport$pointsfilepattern
+points.folder    <- config$transport$pointsfolder
 barycenter.euclidean.file <- config$barycenters$euclidean
 barycenter.euclidean.gmra.file <- sprintf("%s.gmra",
                                           file_path_sans_ext( barycenter.euclidean.file ) )
@@ -23,6 +23,7 @@ im.mean = NULL
 to.orig.index <- c()
 index <- 1
 im.counts = NULL
+names <- c()
 for( i in 1:length(vars$name) ){
   image.file <- sprintf("%s/%s", images.path, vars$name[i])
   if( !file.exists( image.file) ){
@@ -52,7 +53,9 @@ for( i in 1:length(vars$name) ){
   x <- which(im > 0, arr.ind = TRUE )
   x.weights <- im[x]
   im.counts[x] = im.counts[x] + 1
-  save( x, x.weights, file = sprintf( points.file.path, index) )
+  name = basename(file_path_sans_ext(image.file))
+  names  <- append(names, name)
+  save( x, x.weights, file = sprintf( "%s/%s.Rdata", points.folder, name) )
   to.orig.index <- c(to.orig.index, i)
   index <- index+1
 
@@ -86,13 +89,13 @@ for( i in 1:ncol(vars) ){
   if( colnames( vars )[[i]] != "name" ){
     values = as.numeric(vars[to.orig.index, i])
     index = which( !is.na( values ) )
-    variables[[ var.index ]] = list( values=values, name=name, index = index )
+    variables[[ var.index ]] = list( values=values, name=name, index=index )
     var.index = var.index+1
   }
 }
 
-save(variables, dims,n, to.orig.index,
-     file = var.file)
+file.names = names
+save(variables, dims,n, to.orig.index, file.names, file = var.file)
 
 barycenter = list( image = barycenter.euclidean, orig.image = orig.im.mean,
                    gmra.weights = barycenter.euclidean.weights,

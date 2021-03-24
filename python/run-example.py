@@ -66,6 +66,7 @@ def main():
 
   #Run shiny voxel based visualization
   os.system( "cp ../Scripts/Shiny/* ./example/results" )
+  os.system( "cp ../Scripts/ShinyVtkWidgets/render.js ./example/results/render.js" )
   os.system( "Rscript ./example/results/app.R"
              " --workingfolder ./example/results/" )
 

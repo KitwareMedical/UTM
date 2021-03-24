@@ -1,6 +1,6 @@
 #Where should standard out be directed
 progresspipe: ""
-#Numbe of parallel processors to use
+#Number of parallel processors to use
 nparallel: 8
 
 #atlas.Rdata file that matches atlas used for registration
@@ -32,14 +32,17 @@ barycenters:
   #Sparsity for euclidean mean. Remove pixel with less than
   #0.3 of maximal average intensity. The number of pixels
   #in the average affects transport computation times
-  sparsity: 0.3
+  sparsity: 0.1
 
 #Run optimal transport computation
 #this is required when using utm features
 #but only needs to be recomputed if the input
-#images changed
+#images changed, if image are added leave recompute
+#can be left to OFF and transport maps for only the new
+#images will be computed
 transport:
   use: OFF
+  recompute: OFF
   #folders for intermeidate compuation results
   #relative to workingfolder
   pointsfolder: "Points"
@@ -69,6 +72,7 @@ transport:
 #Features to compute
 features:
   folder: "Features"
+
   #Convolutional optimal transport does not require transport
   #computation above
   #(https://arxiv.org/abs/1607.05816)
@@ -85,33 +89,44 @@ features:
     lambda.target: 100
     #number of iterations
     iterations: 10
+
   #Classical vbm (smoothed input images)
+  #
+  #(Processing/create.vbm.features.R)
   vbm:
     use: ON
     folder: "VBM"
     #smooth intensity images
     sigma: 0.5
+
   #unbalanced optimal transport requires transport
   #computation rom above
   #
-  #(Processing
+  #(Processing/create.utm.features.R)
   utm:
     use: OFF
     folder: "UTM"
-
     #Smooth mass allocation and transport feature images
     sigma: 0.5
 
 #Analysis steps to perform
 analysis:
   folder: "Analysis"
+
+  #Correlation with permutation based p-value
+  #computation.
+  #n.chunks determines the chunk size used in the computation
+  #since the whole data does not typically fit in memory
+  ##(Results used in Shiny/app.R)
   correlation:
     use: ON
     permutations: 5000
     n.chunks: 50000
+
   #Run principal compnent and spatially regularized
   #component analysis see
   #(https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
+  ##(Results used in ShinyComponents/app.R)
   components:
     use: OFF
     #Number of components for PCA
@@ -131,15 +146,24 @@ analysis:
     kappa: 0.001
     #
     sigma: 1
+
   #Parcel based analysis requires atlas file
+  #Computes parcelation counts of features
+  #that can be used for statistical analysis
+  #(Results used in ShinyParcels/app.R)
   parcels:
     use: OFF
+
   #Morse-Smale parcel computation and analysis
+  #Computes morse-samle parcel from data variance per voxel
+  #and uses parcellation as above
+  #(Results used in ShinyComponents/app.R)
   ms.parcels:
     use: OFF
     n.components: 40
     pLevelP: 0.2
 
+#Legacy - might not work anymore
 report:
   use: OFF
   #p-value threshold for generating images in report

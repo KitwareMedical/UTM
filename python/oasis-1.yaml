@@ -34,7 +34,7 @@ barycenters:
   #Sparsity for euclidean mean. Remove pixel with less than
   #0.3 of maximal average intensity. The number of pixels
   #in the average affects transport computation times
-  sparsity: 0.3
+  sparsity: 0.1
 
 #Run optimal transport computation
 #this is required when using utm features
@@ -42,6 +42,7 @@ barycenters:
 #images changed
 transport:
   use: OFF
+  recompute: OFF
   #folders for intermeidate compuation results
   #relative to workingfolder
   pointsfolder: "Points"

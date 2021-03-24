@@ -7,9 +7,8 @@ library(doParallel, quietly=TRUE, verbose=FALSE, warn.conflicts=F)
 
 utm.features <- function(config){
 
-transport.maps.file = config$transport$filepattern
-points.file = config$transport$pointsfilepattern
-feature.file.pattern = config$features$utm$filepattern
+transport.folder = config$transport$transportfolder
+points.folder = config$transport$pointsfolder
 var.file = config$variablesfile
 sigma = config$features$utm$sigma
 n.parallel <- config$nparallel
@@ -148,16 +147,17 @@ analyse.mass.2d <- function(toCoords, fromCoords, toMass, fromMass, map, dim.x, 
 
 
 
-create.average.images.3d <- function( load.file, points.file, n,
-                                      dim.x, dim.y, dim.z, sigma,
-                                      feature.file.pattern){
-  foreach( i = 1:n, .export = c('create.image.from.points.3d', 'analyse.mass.3d'),
+create.average.images.3d <- function(feature.folder, points.folder, transport.folder,
+                                     dim.x, dim.y, dim.z, sigma){
+  foreach( name = file.names, .export = c('create.image.from.points.3d', 'analyse.mass.3d'),
                     .packages = c("gmra", "data.table", "mmand") ) %dopar% {
-    filename = sprintf(points.file, i)
-    intensity = create.image.from.points.3d( filename, dim.x, dim.y, dim.z )
+  #for( name = file.names){
+    points.file <- sprintf("%s/%s.Rdata", points.folder, name)
+    trp.file <- sprintf("%s/%s.Rdata", transport.folder, name)
+    feature.file = sprintf("%s/%s.Rdata", feature.folder, name)
 
-    filename = sprintf(load.file, i)
-    load(filename)
+    intensity = create.image.from.points.3d( points.file, dim.x, dim.y, dim.z )
+    load(trp.file)
     mass <- analyse.mass.3d( to, from, toMass, fromMass, map,
                              dim.x, dim.y, dim.z)
 
@@ -180,23 +180,26 @@ create.average.images.3d <- function( load.file, points.file, n,
     }
     features = list( allocation=allocation, transport=transport )
 
-    save( features, file=sprintf(feature.file.pattern, i), compress=FALSE )
+    save( features, file=feature.file, compress=FALSE )
   }
   invisible()
 }
 
 
 
-create.average.images.2d <- function( load.file, points.file, n,
+create.average.images.2d <- function( feature.folder, points.folder, transport.folder,
                                       dim.x, dim.y, sigma,
                                       feature.file.pattern){
-  foreach( i = 1:n, .export = c('create.image.from.points.2d', 'analyse.mass.2d'),
+  foreach( name = file.names, .export = c('create.image.from.points.2d', 'analyse.mass.2d'),
                     .packages = c("gmra", "data.table", "mmand") ) %dopar% {
-    filename = sprintf(points.file, i)
-    intensity = create.image.from.points.2d( filename, dim.x, dim.y )
 
-    filename = sprintf(load.file, i)
-    load(filename)
+    points.file <- sprintf("%s/%s.Rdata", points.folder, name)
+    trp.file <- sprintf("%s/%s.Rdata", transport.folder, name)
+    feature.file = sprintf("%s/%s.Rdata", feature.folder, name)
+
+    intensity = create.image.from.points.2d( points.file, dim.x, dim.y )
+
+    load(trp.file)
     mass <- analyse.mass.2d( to, from, toMass, fromMass,
                              map, dim.x, dim.y)
 
@@ -222,22 +225,20 @@ create.average.images.2d <- function( load.file, points.file, n,
     }
     features = list( allocation=allocation, transport=transport  )
  #, transportto=transport.to, transportfrom = transport.from)
-    save( features, file=sprintf(feature.file.pattern, i), compress=FALSE )
+    save( features, file=feature.file, compress=FALSE )
   }
   invisible()
 }
 
 
 
-
+feature.folder = config$features$utm$folder
 if( length(dims) == 3 ){
-  create.average.images.3d( transport.maps.file, points.file, n,
-                            dims[1], dims[2], dims[3],
-                            sigma, feature.file.pattern)
+  create.average.images.3d(feature.folder, points.folder, transport.folder,
+                           dims[1], dims[2], dims[3], sigma)
 }else{
-  create.average.images.2d( transport.maps.file, points.file, n,
-                            dims[1], dims[2],
-                            sigma, feature.file.pattern)
+  create.average.images.2d(feature.folder, points.folder, transport.folder,
+                           dims[1], dims[2], sigma)
 }
 
 stopCluster(cl)

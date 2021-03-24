@@ -95,7 +95,7 @@ load( config$barycenters$euclidean )
 barycenter.euclidean = barycenter
 try(suppressWarnings( load( config$barycenters$otdiscrete ) ), silent=TRUE )
 barycenter.ot = barycenter
-t.cols = hcl.colors( palette="PuOr", n = 255, alpha=1)
+t.cols = hcl.colors( palette="PiYG", n = 255, alpha=1)
 t.cols = colorRamp( t.cols )
 var.names <- c()
 for(i in 1:length(variables) ){

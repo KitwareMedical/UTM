@@ -107,7 +107,7 @@ function (x, global) {
 
       const isBackgroundDark = true;
       global.controllerWidget.setupContent( renderWindow, global.volumeActor,
-                                            isBackgroundDark, true, 'PuOr');
+                                            isBackgroundDark, true, 'PiYG');
       var widget = global.controllerWidget.getWidget();
       widget.removeGaussian(0);
       widget.addGaussian(0.2, 1, 0.25, -0.12, 0);

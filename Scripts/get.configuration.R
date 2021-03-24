@@ -26,16 +26,6 @@ if(config$atlas$file == ""){
   config$atlas$file = sprintf("%s/../Atlas/sri24/labels/atlas.Rdata", script.folder)
 }
 
-#setup intermediate files and folders
-config$transport$gmrafilepattern =
-  sprintf("./%s/gmra%s.gmra", config$transport$gmrafolder, "%04d" )
-config$transport$gmrafilebase =
-  sprintf("./%s/gmra", config$transport$gmrafolder )
-config$transport$pointsfilepattern =
-  sprintf("./%s/points%s.Rdata", config$transport$pointsfolder, "%04d" )
-config$transport$filepattern =
-  sprintf("./%s/trp-%s.Rdata", config$transport$transportfolder, "%04d" )
-
 config$barycenters$euclidean =
   sprintf("./%s/barycenter-euclidean.Rdata", config$barycenter$folder)
 config$barycenters$otdiscrete =
@@ -50,7 +40,6 @@ if( str_to_lower( config$barycenters$type ) == "wasserstein" ){
   config$barycenters$file = config$barycenters$euclidean
 }
 
-
 config$features$folder =
   sprintf("./%s/%s/", config$analysis$folder, config$features$folder)
 config$features$vbm$folder =
@@ -60,19 +49,9 @@ config$features$utm$folder =
 config$features$conv$folder =
   sprintf("%s/%s/", config$features$folder, config$features$conv$folder)
 
-config$features$vbm$filepattern =
-  sprintf("%s/vbm%s.Rdata", config$features$vbm$folder, "%04d" )
-config$features$utm$filepattern =
-  sprintf("%s/utm%s.Rdata", config$features$utm$folder, "%04d" )
-config$features$conv$filepattern =
-  sprintf("%s/conv%s.Rdata", config$features$conv$folder, "%04d" )
-
-
-
 config$analysis$correlation$file =
   sprintf("./%s/cor-vbm-utm.Rdata", config$analysis$folder)
 config$report$pdffile = "cor-tables.tex"
-
 
 config$results$folder =
   sprintf( "./%s/Images/", config$analysis$folder )
@@ -81,7 +60,6 @@ config$report$slices$folder  =
 
 config$imagefolder = normalizePath( config$imagefolder )
 config$variables   = normalizePath( config$variables )
-
 
 
 #Make sure only the requested steps are performed to update the pipeline

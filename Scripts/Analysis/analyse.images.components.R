@@ -193,7 +193,6 @@ principal.components.randomized <- function(files, n.components, variables,
 #compute principal components from m>>n, byt computing svd of X^t X, with X mean cenetered
 #Then the principal compnents are X V S^-1 with X^tX = V S V^t, X = U S V^t
 principal.components <- function(files, n.components){
-                                             n.power.iterations=2, n.over=4){
   suppressMessages(
   suppressWarnings(
   library(ANTsR)
@@ -324,7 +323,7 @@ load( variables.path )
 feature.folders <- list.dirs(features.folder, full.names=TRUE, recursive=FALSE)
 for( k in 1:length(feature.folders) ){
   #print(basename(feature.folders[[k]]) )
-  files <- list.files(feature.folders[[k]], full.names=TRUE)
+  files <- sprintf("%s/%s.Rdata", feature.folders[[k]], file.names)
   pcs.file = sprintf( "%s/%s-pcs.Rdata",
                       save.path, basename(feature.folders[[k]]) )
   pcs.split.file = sprintf( "%s/%s-pcs-split.Rdata",

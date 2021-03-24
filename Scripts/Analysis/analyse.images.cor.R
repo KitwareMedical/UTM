@@ -32,8 +32,8 @@ cor.permutation.test <- function(y, x, n){
   chunk.size.cor =min(200, n)
   l <- ceiling( n / chunk.size.cor )
   p.y[k] <- foreach(i=1:l, .combine="+") %dopar% {
-    if( i *chunk.size.cor > n){
-      size = chunk.size.cor - chunk.size.cor*i + n
+    if( i * chunk.size.cor > n){
+      size <- chunk.size.cor - chunk.size.cor * i + n
     }
     else{
       size <- chunk.size.cor
@@ -44,7 +44,7 @@ cor.permutation.test <- function(y, x, n){
   }
 
   stopCluster(cl)
-  list( cor = c.y, p = p.y/n, n=n)
+  list(cor=c.y, p=p.y/n, n=n)
 }
 
 load( variables.path )
@@ -89,9 +89,8 @@ for(i in 1:l){
   names(all) = feature.names
   koff <- 0
   for( f in feature.folders ){
-    files <- list.files(f, full.names=TRUE)
-    for(j in 1:n){
-      load( files[[j]] )
+    for(name in file.names){
+      load( sprintf("%s/%s.Rdata", f, name ) )
       for(k in 1:length(features) ){
         all[[koff+k]][j, ]  = as.vector(features[[k]])[start:end]
       }

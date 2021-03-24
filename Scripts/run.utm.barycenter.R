@@ -57,7 +57,7 @@ setwd( opts$options$working.folder )
 create.directories(config)
 
 #save configuration as r data
-r.config = normalizePath("./configuration.Rdata")
+r.config = "./configuration.Rdata"
 save(config, file=r.config)
 if(config$atlas$use){
   #store atlas for use with shiny apps in working dir
@@ -91,6 +91,7 @@ run.script <- function(script.file, message, current.start, current.end){
     update.progress( sprintf("%s - Done", message), 100, current.end, config$progresspipe )
     },
     error = function(e){
+      print(e)
       update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
       update.progress( e$message, 100, current.end, config$progresspipe)
     }
@@ -103,6 +104,7 @@ run.script <- function(script.file, message, current.start, current.end){
 if( config$setup$use ){
   run.script("Processing/setup.R", "Setup", 0, 5)
 }
+load(config$variablesfile)
 
 #Compute multiscale representations if transport is used
 if( config$transport$use ){
@@ -112,9 +114,10 @@ if( config$transport$use ){
           paste(c(
           "--jobs", config$nparallel,
               "Rscript", sprintf("%s/Processing/create.gmra.R", script.folder),
-                  config$transport$gmrafilepattern,
-                  config$transport$pointsfilepattern,
-          ":::", sprintf("%d", 1:config$nimages)
+                  config$transport$recompute,
+                  config$transport$pointsfolder,
+                  config$transport$gmrafolder,
+                 ":::", file.names
                 ), collapse=" " )
     )
     update.progress( "Computing Multiscale - Done", 100, 10, config$progresspipe )
@@ -139,12 +142,13 @@ if( config$transport$use){
               "Rscript", sprintf("%s/Processing/mean.transport.unscaled.R", script.folder),
                   config$transport$cost,
                   config$transport$massbalancing,
-                  config$transport$gmrafilepattern,
+                  config$transport$gmrafolder,
                   config$barycenters$file,
-                  config$transport$filepattern,
+                  config$transport$transportfolder,
                   config$transport$degree,
-                  config$transport$pointsfilepattern,
-            ":::", sprintf("%d", 1:config$nimages) ), collapse=" " )
+                  config$transport$pointsfolder,
+                  config$transport$recompute,
+            ":::", file.names ), collapse=" " )
     )
     update.progress( "Computing transport maps - Done", 100, 70, config$progresspipe )
     },
@@ -191,7 +195,7 @@ if( config$analysis$ms.parcels$use ){
 }
 
 
-#### Legacy code
+#### Legacy code - might not run correctly anymore
 #Save correlation and p-value images and create pdf summary of images
 if( config$report$use ){
   threshold = 1 - config$report$threshold
