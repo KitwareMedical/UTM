@@ -1,9 +1,6 @@
 import os
 
-for key, value in scales.items():
-    os.system(("Rscript ../Scripts/run.utm.barycenter.R {3}/gray {1}"
-                 " --working.folder {2}/results/{3}"
-                 " --config {0}" ).format(value, csv_out_file, output_folder, key ) )
+
 
 ##Run script
 parser = argparse.ArgumentParser(description=('Perform On OASIS-1 data.'
@@ -35,6 +32,11 @@ for f in scales.keys():
 
 #Modified input csv file to match R script expectations
 csv_out_file = "{0}/data.csv".format(output_folder)
+
+for key, value in scales.items():
+  os.system(("Rscript ../Scripts/run.utm.barycenter.R {3}/gray {1}"
+             " --working.folder {2}/results/{3}"
+             " --config {0}" ).format(value, csv_out_file, output_folder, key ) )
 
 if __name__ == '__main__':
   main()
