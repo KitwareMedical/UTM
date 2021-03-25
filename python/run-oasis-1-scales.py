@@ -21,11 +21,6 @@ scales = {
  "gray_scale_3" : "oasis-1-scale-3.yaml"
 }
 
-for f in scales.keys():
-  try:
-    os.mkdir("{0}/{1}".format(output_folder, f))
-  except FileExistsError:
-    pass
 
 #Modified input csv file to match R script expectations
 csv_out_file = "{0}/data.csv".format(output_folder)
