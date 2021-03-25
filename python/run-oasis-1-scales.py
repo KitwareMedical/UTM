@@ -5,13 +5,10 @@ import argparse
 ##Run script
 parser = argparse.ArgumentParser(description=('Perform On OASIS-1 data.'
         ' See download-oasis-1.py for obtaining data.'))
-parser.add_argument('--input_folder', required=True,
-        help='path to folder containg oasis-1 data')
 parser.add_argument('--output_folder', required=True,
         help='output path to store files to')
 args = parser.parse_args()
 
-input_folder = args.input_folder
 output_folder = args.output_folder
 
 
