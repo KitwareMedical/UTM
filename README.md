@@ -2,14 +2,18 @@
 ![UTM Example](Figures/UTM-3D-example.png )
 ![UTM Example](Figures/UTM-3D-example-2.png )
 
-This is a repository that contains scripts to run volmetric population analysis on brain image data sets.
-For a general introduction see [Brain morphometry](https://en.wikipedia.org/wiki/Brain_morphometry).
+This is a repository that contains scripts to run volmetric population analysis
+on brain image data sets.  For a general introduction see 
+[Brain morphometry](https://en.wikipedia.org/wiki/Brain_morphometry).
 
-The scripts perfrom preprocessing, feature extraction and different statistical analysis.
+The scripts perfrom preprocessing, feature extraction and different statistical
+analysis.
 
 The scripts perfrom feature extraction using:
-- Standard and modified VBM approaches ([VBM](https://en.wikipedia.org/wiki/Voxel-based_morphometry))
-- A novel approach based on optimal tansport ([UTM](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6547365/)) that aims to mitgiate some concerns with VBM.
+- Standard and modified VBM approaches 
+  ([VBM](https://en.wikipedia.org/wiki/Voxel-based_morphometry))
+- A novel approach based on optimal tansport 
+  ([UTM](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6547365/)) that aims to mitgiate some concerns with VBM.
 
 For both approaches different statistical analysises are available:
 
@@ -18,7 +22,8 @@ For both approaches different statistical analysises are available:
 - **Component based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Components/)
   - PCA: Principal compnent based statistical models
-  - SpatCA: Spatially regularized compnent based statsitical models ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
+  - SpatCA: Spatially regularized compnent based statsitical models 
+    ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
 - **Parcelation based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
 
@@ -60,13 +65,13 @@ To run the examples install the [requirements](#requirements-to-run-scripts) fir
 
 For a self contained example see  
 [run-example.py](python/run-example.py)  
-The example preprocesses a aset of images and passes the preprocessed images to the analysis script.
+The example preprocesses a set of images and passes the preprocessed images to the analysis script.
 
 For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
 [run-oasis-1.py](python/run-oasis-1.py)
 
 ## Visualization of the Results
-The resulst are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
+The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
  - [Shiny](./Scripts/Shiny/app.R)
  - [ShinyParcels](./Scripts/ShinyParcels/app.R)
  - [ShinyComponents](./Scripts/ShinyComponents/app.R)
@@ -85,8 +90,6 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - dipy
 
 ### Analysis Steps
-- GNU Parallel,
-- latex / pdflatex to create report (not manadatory)
 - R >= 3.6
 - R packages (Packages folder contains a script to install all):
   - gmra
@@ -102,10 +105,13 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - optparse
   - pracma
   - yaml
-  - ANTsR (requires devtools which depends on curl and git deve libraries)
+  - ANTsR (requires devtools which depends on curl and git devel libraries)
 - R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
 
-In the Packages subfolder in Scripts are scripts to install all these packages (in particular install-all.sh). If that script fails due to not able to write into the R library directory install a package manually from R in order to create a local lib directory ( start R, run install.packages("optparse") )
+In the Packages subfolder in Scripts are scripts to install all these packages
+(in particular install-all.sh).  If that script fails due to not able to write
+into the R library directory install a package manually from R in order to
+create a local lib directory ( start R, run install.packages("optparse") )
 
 ### Visualization
 - R
@@ -139,7 +145,9 @@ An older version that was used for the MICCAI 2018
 [Unbalanced Optimal Transport for Exploratory Population Analysis](https://github.com/KitwareMedicalPublications/2018-MICCAI-UTM)
 can be found in the Apps-Old folder.
 
-The processing pipeline has been signifcantly changed. To run the older examples from the paper you will ahve to use the correct paths to Scripts/Old to amke this work again.
+The processing pipeline has been signifcantly changed. To run the older
+examples from the paper you will ahve to use the correct paths to Scripts/Old
+to amke this work again.
 
 # Older Analysis Results
 Analysis result with older prototype application.
@@ -147,7 +155,8 @@ Analysis result with older prototype application.
 ## OASIS-1 data set
 Data Set: https://www.oasis-brains.org/#oasis1
 
-VBM and UTM (different levels of local and global) analysis of mini mental score, clinical dementia rating, age:
+VBM and UTM (different levels of local and global) analysis of 
+mini mental score, clinical dementia rating, age:
 - White matter: https://sg-kitware.shinyapps.io/OASIS1-WhiteMatter
 - Gray Matter: https://sg-kitware.shinyapps.io/OASIS1-GrayMatter
 - CSF: https://sg-kitware.shinyapps.io/OASIS1-CSF
@@ -155,7 +164,8 @@ VBM and UTM (different levels of local and global) analysis of mini mental score
 ## IBIS data set
 Data set: IBIS for study of Autsim development
 
-VBM and UTM analysis of different groups (HRASD - Highr risk autisum, LRpos - Low risk positive, LRneg - Low risk negative)
+VBM and UTM analysis of different groups 
+(HRASD - High risk autisum, LRpos - Low risk positive, LRneg - Low risk negative)
 - White Matter: https://sg-kitware.shinyapps.io/IBIS-Normalized-WhiteMatter
 - Gray Matter: https://sg-kitware.shinyapps.io/IBIS-Normalized-GrayMatter
 - CSF: https://sg-kitware.shinyapps.io/IBIS-Normalized-CSF
@@ -167,7 +177,7 @@ VBM and UTM:
 - White Matter VBM only: https://sg-kitware.shinyapps.io/OASIS-3-WM
 - White Matter: https://sg-kitware.shinyapps.io/OASIS3-WhiteMatter
 
-Spatial component based analysis (https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
+[Spatial component based analysis](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
 - https://sg-kitware.shinyapps.io/OASIS-3-WM-Components
 
 

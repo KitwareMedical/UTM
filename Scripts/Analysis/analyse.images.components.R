@@ -338,7 +338,6 @@ for( k in 1:length(feature.folders) ){
   }
   if( n.comps.exist != n.components){
     #pcs <- principal.components( files, n.components )
-    print( "  Computing principal components" )
     pcs <- principal.components.randomized( files, n.components, variables )
     save( pcs,  file= pcs.file)
   }

@@ -89,8 +89,8 @@ for(i in 1:l){
   names(all) = feature.names
   koff <- 0
   for( f in feature.folders ){
-    for(name in file.names){
-      load( sprintf("%s/%s.Rdata", f, name ) )
+    for(j in 1:length(file.names)){
+      load( sprintf("%s/%s.Rdata", f, file.names[j] ) )
       for(k in 1:length(features) ){
         all[[koff+k]][j, ]  = as.vector(features[[k]])[start:end]
       }

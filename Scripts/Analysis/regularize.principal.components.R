@@ -3,11 +3,13 @@
 regularize.principal.components <- function( pcs, lambda.factor.pos, lambda.factor.neg, sigma,
                                              step, n.iter, n.comps, files, init.pca = TRUE,
                                              kf = 1:length(pcs$components)){
+  suppressMessages({
   suppressWarnings({
   library( ANTsR, quietly=TRUE, warn.conflicts=F, verbose=FALSE)
   library( pracma, quietly=TRUE, warn.conflicts=F, verbose=FALSE )
-  })
   #library( tvR )
+  })
+  })
 
   regularized <- pcs$components
   n.features = length( regularized )

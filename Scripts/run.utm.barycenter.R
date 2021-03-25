@@ -79,7 +79,7 @@ update.progress <- function(message, total, current, pipe){
   }
 }
 
-
+#Run an individual script and update progress
 run.script <- function(script.file, message, current.start, current.end){
   tryCatch({
     update.progress( message, 100, current.start, config$progresspipe )
@@ -108,25 +108,7 @@ load(config$variablesfile)
 
 #Compute multiscale representations if transport is used
 if( config$transport$use ){
-  tryCatch({
-    update.progress( "Computing Multiscale", 100, 5, config$progresspipe )
-    system2("parallel",
-          paste(c(
-          "--jobs", config$nparallel,
-              "Rscript", sprintf("%s/Processing/create.gmra.R", script.folder),
-                  config$transport$recompute,
-                  config$transport$pointsfolder,
-                  config$transport$gmrafolder,
-                 ":::", file.names
-                ), collapse=" " )
-    )
-    update.progress( "Computing Multiscale - Done", 100, 10, config$progresspipe )
-    },
-    error = function(e){
-      update.progress( "Computing Mutliscale - Failed", 100, 10, config$progresspipe )
-      update.progress( e$message, 100, 10, config$progresspipe)
-    }
-  )
+  run.script("Processing/run.create.gmra.parallel.R", "Creating Mutliscale Point Sets", 5, 10)
 }
 
 #Compute wasserstein barycenter
@@ -136,27 +118,7 @@ if( config$barycenters$use & str_to_lower( config$barycenters$type ) == "wassers
 
 #compute transport maps to barycenter create allocation and transport feature images
 if( config$transport$use){
-  tryCatch({
-    update.progress( "Computing transport maps", 100, 40, config$progresspipe )
-    system2( "parallel", paste( c( "--jobs", config$nparallel,
-              "Rscript", sprintf("%s/Processing/mean.transport.unscaled.R", script.folder),
-                  config$transport$cost,
-                  config$transport$massbalancing,
-                  config$transport$gmrafolder,
-                  config$barycenters$file,
-                  config$transport$transportfolder,
-                  config$transport$degree,
-                  config$transport$pointsfolder,
-                  config$transport$recompute,
-            ":::", file.names ), collapse=" " )
-    )
-    update.progress( "Computing transport maps - Done", 100, 70, config$progresspipe )
-    },
-    error = function(e){
-      update.progress( "Computing transport maps - Failed", 100, 70, config$progresspipe )
-      update.progress( e$message, 100, 70, config$progresspipe)
-    }
-  )
+  run.script("Processing/run.unbalanced.transport.parallel.R", "Computing OT Maps", 40, 70)
 }
 
 if( config$features$vbm$use ){

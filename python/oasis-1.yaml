@@ -28,7 +28,7 @@ setup:
 barycenters:
   use: OFF
   #Barycenter to compute, Euclidean or Wasserstein
-  type: "Wasserstein"
+  type: "Euclidean"
   #Where to store results relative to working folder
   folder: "Barycenter"
   #Sparsity for euclidean mean. Remove pixel with less than
@@ -70,6 +70,7 @@ transport:
 #Features to compute
 features:
   folder: "Features"
+  recompute: OFF
   #Convolutional optimal transport does not require transport
   #computation above
   #(https://arxiv.org/abs/1607.05816)

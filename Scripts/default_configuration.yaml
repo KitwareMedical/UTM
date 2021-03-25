@@ -72,6 +72,7 @@ transport:
 #Features to compute
 features:
   folder: "Features"
+  recompute: OFF
 
   #Convolutional optimal transport does not require transport
   #computation above

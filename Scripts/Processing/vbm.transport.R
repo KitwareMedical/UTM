@@ -16,6 +16,7 @@ sigma = config$features$vbm$sigma
 weight.sigma = 0
 transport.sigma = 0
 n.parallel <- config$nparallel
+recompute = config$features$recompute
 
 if(n.parallel < 1){
   n.parallel <- detectCores()
@@ -71,6 +72,13 @@ foreach(i=1:length(vars$name), .combine="+",
   if(!file.exists(image.file)){
     next
   }
+  file.name = basename(file_path_sans_ext(image.file))
+  vbm.file = sprintf("%s/%s.Rdata", config$features$vbm$folder, file.name)
+
+  if( !recompute & file.exists(vbm.file) ){
+    return( NULL )
+  }
+
   image <- load.image(image.file)
   mean <- barycenter$image #orig.image
   #vbm.allocation <- convolutionalWasserstein(mean, image, 1, 20)
@@ -126,8 +134,6 @@ foreach(i=1:length(vars$name), .combine="+",
 
   features = list(#vbmallocation = vbm.allocation,
                   vbm = vbm )
-  file.name = basename(file_path_sans_ext(image.file))
-  vbm.file = sprintf("%s/%s.Rdata", config$features$vbm$folder, file.name)
   save( features, file = vbm.file )
 
   NULL

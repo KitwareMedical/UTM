@@ -18,6 +18,7 @@ conv.lambda1 = config$features$conv$lambda.mean
 conv.lambda2 = config$features$conv$lambda.target
 conv.iterations = config$features$conv$iterations
 n.parallel = config$nparallel
+recompute = config$features$recompute
 
 if(n.parallel < 1){
   n.parallel <- detectCores()
@@ -35,7 +36,6 @@ vars <- read.table(var.table, sep=",", header=TRUE)
 foreach(i=1:length(vars$name), .combine="+",
         .packages = c("tools", "ANTsR") ) %dopar% {
 #for( i in 1:length(vars$name) ){
-
   load.image <- function(image.file){
     file.type = tolower( file_ext( image.file ) )
     if(      file.type == "png"   ){
@@ -102,6 +102,12 @@ foreach(i=1:length(vars$name), .combine="+",
   if( !file.exists(image.file)){
     return(NULL)
   }
+  file.name = basename(file_path_sans_ext(image.file))
+  conv.file = sprintf("%s/%s.Rdata", config$features$conv$folder, file.name)
+  if( !recompute & file.exists(conv.file) ){
+    return( NULL )
+  }
+
   image <- load.image(image.file)
   mean <- barycenter$image #orig.image
 
@@ -110,8 +116,7 @@ foreach(i=1:length(vars$name), .combine="+",
                                      conv.iterations)
 
   features = list(convolutional = convw)
-  file.name = basename(file_path_sans_ext(image.file))
-  conv.file = sprintf("%s/%s.Rdata", config$features$conv$folder, file.name)
+
   save( features, file = conv.file, compress=FALSE )
 
   NULL

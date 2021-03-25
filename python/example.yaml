@@ -70,6 +70,7 @@ transport:
 #Features to compute
 features:
   folder: "Features"
+  recompute: OFF
   #Convolutional optimal transport does not require transport
   #computation above
   #(https://arxiv.org/abs/1607.05816)
@@ -137,7 +138,7 @@ analysis:
     use: ON
   #Morse-Smale parcel computation and analysis
   ms.parcels:
-    use: ON
+    use: OFF
     n.components: 40
     pLevelP: 0.2
 
