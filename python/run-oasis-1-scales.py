@@ -23,7 +23,7 @@ scales = {
 
 for f in scales.keys():
   try:
-    os.mkdir("{0}/{2}".format(output_folder, f))
+    os.mkdir("{0}/{1}".format(output_folder, f))
   except FileExistsError:
     pass
 
