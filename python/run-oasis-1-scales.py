@@ -1,4 +1,3 @@
-import concurrent.futures
 import os
 
 for key, value in scales.items():
@@ -30,7 +29,7 @@ scales = {
 
 for f in scales.keys():
   try:
-    os.mkdir("{0}/{2}".format(output_folder, )
+    os.mkdir("{0}/{2}".format(output_folder, f)
   except FileExistsError:
     pass
 
