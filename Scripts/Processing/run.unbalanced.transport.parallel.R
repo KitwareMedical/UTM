@@ -18,7 +18,7 @@ load(config$variablesfile)
 
 foreach(name = file.names) %dopar% {
   tryCatch({
-    system2( "Rscript", sprintf("%s/Processing/unabalanced.transport.R", config$script.folder),
+    system2( "Rscript", c(sprintf("%s/Processing/unbalanced.transport.R", config$script.folder),
                   config$transport$cost,
                   config$transport$massbalancing,
                   config$transport$gmrafolder,
@@ -27,12 +27,25 @@ foreach(name = file.names) %dopar% {
                   config$transport$degree,
                   config$transport$pointsfolder,
                   config$transport$recompute,
-                  name
+                  name)
             )
     },
     error = function(e){
-
+      print(e)
     })
 }
-
+invisible(NULL)
 }
+
+suppressWarnings(
+  library(optparse, quietly=TRUE, warn.conflicts=F, verbose=FALSE)
+)
+option_list = list(
+  make_option( c("--config"), type="character", default="",
+               help="configuration Rdata file with a config structure" )
+)
+opt_parser = OptionParser( option_list=option_list,
+                           usage = "usage: %prog --config config.Rdata" )
+opts <- try( parse_args(opt_parser), silent=FALSE )
+load(opts$config)
+run.unbalanced.transport.parallel(config)

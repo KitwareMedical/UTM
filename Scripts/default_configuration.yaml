@@ -168,7 +168,7 @@ analysis:
 report:
   use: OFF
   #p-value threshold for generating images in report
-  threhsold: 0.05
+  threshold: 0.05
   #Extract slice for report at location x [between 0 and 1]
   axial: 0.4
   sagittal: 0.4
