@@ -57,14 +57,14 @@ transport:
   #    3 - Match source mass (Add or subtract in source to match target)
   #    4 - Free (Add or subtract mass anywhere)
   #    5 - Free source only (Add or subtract mass in source only)
-  massbalancing: 3
+  massbalancing: 4
   #Cost for adding mass, this adds a trade of between
   #transporting mass or adding mass
   #thus mass is only transported if it is cheaper
   #than allocation or removing mass
   #Cost effectively acts as a radius for within
   #transportation is prefered to mass allocation
-  cost: 0
+  cost: 16
   degree: 2
 
 #Features to compute
@@ -98,7 +98,7 @@ features:
   #
   #(Processing/)
   utm:
-    use: OFF
+    use: ON
     folder: "UTM"
     #Smooth mass allocation and transport feature images
     sigma: 0.75
@@ -135,10 +135,10 @@ analysis:
     sigma: 1
   #Parcel based analysis requires atlas file
   parcels:
-    use: ON
+    use: OFF
   #Morse-Smale parcel computation and analysis
   ms.parcels:
-    use: ON
+    use: OFF
     n.components: 40
     pLevelP: 0.2
 
