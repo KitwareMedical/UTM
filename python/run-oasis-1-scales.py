@@ -31,7 +31,7 @@ for f in scales.keys():
 csv_out_file = "{0}/data.csv".format(output_folder)
 
 for key, value in scales.items():
-  os.system(("Rscript ../Scripts/run.utm.barycenter.R {3}/gray {1}"
+  os.system(("Rscript ../Scripts/run.utm.barycenter.R {2}/gray {1}"
              " --working.folder {2}/results/{3}"
              " --config {0}" ).format(value, csv_out_file, output_folder, key ) )
 
