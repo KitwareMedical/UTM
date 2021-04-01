@@ -41,7 +41,7 @@ barycenters:
 #can be left to OFF and transport maps for only the new
 #images will be computed
 transport:
-  use: OFF
+  use: ON
   recompute: OFF
   #folders for intermeidate compuation results
   #relative to workingfolder
@@ -105,7 +105,7 @@ features:
   #
   #(Processing/create.utm.features.R)
   utm:
-    use: OFF
+    use: ON
     folder: "UTM"
     #Smooth mass allocation and transport feature images
     sigma: 0.5

@@ -67,6 +67,8 @@ For a self contained example see
 [run-example.py](python/run-example.py)  
 The example preprocesses a set of images and passes the preprocessed images to the analysis script.
 
+For toy example see [Example/Annulus](Example/Annulus)
+
 For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
 [run-oasis-1.py](python/run-oasis-1.py)
 
@@ -127,17 +129,6 @@ create a local lib directory ( start R, run install.packages("optparse") )
   - vtkwidgets
   - shinyWidgets
 
-## Examples
-
-For an example see
-
-[run-example.png](./python/run-example.py)
-
-### Older Examples
-
-See Ellipses and Annulus in Apps folder for toy examples.
-
-For example on brain data see OASIS folder.
 
 ## Older Version
 

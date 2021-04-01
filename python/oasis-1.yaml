@@ -98,7 +98,7 @@ features:
   #
   #(Processing/)
   utm:
-    use: OFF
+    use: ON
     folder: "UTM"
     #Smooth mass allocation and transport feature images
     sigma: 0.75
@@ -115,7 +115,7 @@ analysis:
   #component analysis see
   #(https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
   components:
-    use: OFF
+    use: ON
     #Number of components for PCA
     ncomponents: 5
     #Number of components for spatially regularized component

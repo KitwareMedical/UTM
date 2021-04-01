@@ -138,7 +138,7 @@ analysis:
     use: ON
   #Morse-Smale parcel computation and analysis
   ms.parcels:
-    use: OFF
+    use: ON
     n.components: 40
     pLevelP: 0.2
 
