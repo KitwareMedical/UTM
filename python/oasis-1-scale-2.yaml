@@ -57,14 +57,14 @@ transport:
   #    3 - Match source mass (Add or subtract in source to match target)
   #    4 - Free (Add or subtract mass anywhere)
   #    5 - Free source only (Add or subtract mass in source only)
-  massbalancing: 4
+  massbalancing: 5
   #Cost for adding mass, this adds a trade of between
   #transporting mass or adding mass
   #thus mass is only transported if it is cheaper
   #than allocation or removing mass
   #Cost effectively acts as a radius for within
   #transportation is prefered to mass allocation
-  cost: 16
+  cost: 4
   degree: 2
 
 #Features to compute

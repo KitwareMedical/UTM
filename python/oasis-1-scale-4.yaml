@@ -64,7 +64,7 @@ transport:
   #than allocation or removing mass
   #Cost effectively acts as a radius for within
   #transportation is prefered to mass allocation
-  cost: 8
+  cost: 16
   degree: 2
 
 #Features to compute

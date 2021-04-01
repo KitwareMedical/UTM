@@ -18,7 +18,8 @@ preprocess_folder = "{0}/gray".format(output_folder)
 scales = {
  "gray_scale_1" : "oasis-1-scale-1.yaml",
  "gray_scale_2" : "oasis-1-scale-2.yaml",
- "gray_scale_3" : "oasis-1-scale-3.yaml"
+ "gray_scale_3" : "oasis-1-scale-3.yaml",
+ "gray_scale_4" : "oasis-1-scale-4.yaml"
 }
 
 
@@ -30,5 +31,3 @@ for key, value in scales.items():
              " --working.folder {2}/results/{3}"
              " --config {0}" ).format(value, csv_out_file, output_folder, key ) )
 
-if __name__ == '__main__':
-  main()
