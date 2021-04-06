@@ -598,7 +598,7 @@ server <- function(input, output, session) {
     f.index = which( feature.names == input$feature)
     var <- variables[[v.index]]
     if(input$component == "PCA"){
-      aproj = scale( t(pcs$projections[[f.index]]) )
+      sproj = scale( t(pcs$projections[[f.index]]) )
       comps = pcs$components[[f.index]]
       dims = pcs$dimension[[f.index]]
     }
