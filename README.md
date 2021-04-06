@@ -6,8 +6,9 @@ This is a repository that contains scripts to run volmetric population analysis
 on brain image data sets.  For a general introduction see 
 [Brain morphometry](https://en.wikipedia.org/wiki/Brain_morphometry).
 
-The scripts perfrom preprocessing, feature extraction and different statistical
-analysis.
+The analysis pipeline contains an optimal transport feature extraction step and can 
+perfrom VBM and TBM with and without optimal transport features. The scripts 
+perfrom preprocessing, feature extraction and different statistical analysis. 
 
 The scripts perfrom feature extraction using:
 - Standard and modified VBM approaches 
@@ -28,6 +29,10 @@ For both approaches different statistical analysises are available:
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
 
 Depending on the feature extraction (VBM or UTM) the results have slightly different interpretations.
+
+If you are interested in using only the optimal transport feature extraction step in your own analysis
+pipleine have a look at the R package [OTFeatures](https://github.com/samuelgerber/OTFeatures).
+
 
 ## References 
 The analysis approach is based on the work in:
@@ -67,7 +72,7 @@ For a self contained example see
 [run-example.py](python/run-example.py)  
 The example preprocesses a set of images and passes the preprocessed images to the analysis script.
 
-For toy example see [Example/Annulus](Example/Annulus)
+For a toy example see [Example/Annulus](Example/Annulus)
 
 For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
 [run-oasis-1.py](python/run-oasis-1.py)
@@ -93,6 +98,8 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
 
 ### Analysis Steps
 - R >= 3.6
+- R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
+  - These need to be onstalled before the R packages are installed (use package manager of choice for your system)
 - R packages (Packages folder contains a script to install all):
   - gmra
   - mop, gmra (contained in this repository)
@@ -108,12 +115,11 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - pracma
   - yaml
   - ANTsR (requires devtools which depends on curl and git devel libraries)
-- R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
 
 In the Packages subfolder in Scripts are scripts to install all these packages
-(in particular install-all.sh).  If that script fails due to not able to write
+(in particular install-all.sh). If that script fails due to not able to write
 into the R library directory install a package manually from R in order to
-create a local lib directory ( start R, run install.packages("optparse") )
+create a local lib directory (start R, run install.packages("optparse") )
 
 ### Visualization
 - R
@@ -126,8 +132,9 @@ create a local lib directory ( start R, run install.packages("optparse") )
   - markdown
   - broom
   - corrplot
-  - vtkwidgets
   - shinyWidgets
+- R remote packages: 
+  - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
 
 
 ## Older Version
