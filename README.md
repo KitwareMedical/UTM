@@ -8,7 +8,7 @@ on brain image data sets.  For a general introduction see
 
 The analysis pipeline contains an optimal transport feature extraction step and can 
 perform VBM and TBM with and without optimal transport features. The scripts 
-perform preprocessing, feature extraction and different statistical model. 
+perform preprocessing, feature extraction, analysis and visualization. 
 
 The scripts perform feature extraction using:
 - Standard and modified VBM approaches 
