@@ -8,7 +8,7 @@ on brain image data sets.  For a general introduction see
 
 The analysis pipeline contains an optimal transport feature extraction step and can 
 perfrom VBM and TBM with and without optimal transport features. The scripts 
-perfrom preprocessing, feature extraction and different statistical analysis. 
+perfrom preprocessing, feature extraction and different statistical model.s 
 
 The scripts perfrom feature extraction using:
 - Standard and modified VBM approaches 
@@ -27,6 +27,9 @@ For both approaches different statistical analysises are available:
     ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
 - **Parcelation based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
+
+The compnent and parcel based analysis visualization provide several options for statsitical models
+and custom statistical models can be incorporated through R scripting within the shiny user interface.
 
 Depending on the feature extraction (VBM or UTM) the results have slightly different interpretations.
 
@@ -48,6 +51,7 @@ The spatial component analysis approach is described in:
 > Spatial Component Analysis to Mitigate Multiple Testing in Voxel-Based Analysis.  
 > International Conference on Medical Image Computing and Computer-Assisted Intervention 2020  
 > [Link](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
+This paper also describes the statistical model employed in the parcel and compnent based analysis,
 
 
 
