@@ -34,4 +34,5 @@ library( devtools )
 install_github("stnava/ANTsR")
 
 install_github("samuelgerber/vtkwidgets")
+install_github("samuelgerber/msr")
 
