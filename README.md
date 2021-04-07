@@ -118,6 +118,7 @@ library(devtools)
 Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
 devtools::install_github("samuelgerber/utmR")
 ```
+Or use the [install-all.sh](./Scripts/Packages) shell script.
 
 This will install:
 - R packages (Packages folder contains a script to install all):
