@@ -93,7 +93,8 @@ The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications 
  - [ShinyComponents](./Scripts/ShinyComponents/app.R)
 Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files from the output of the main script.
 
-## Requirements to Run Scripts
+## Install
+Requirements to Run Scripts
 
 ### Preprocessing
 - python 3
@@ -105,13 +106,24 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - nibabel
   - dipy
 
-### Analysis Steps
+### Analysis
 - R >= 3.6
 - R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
   - These need to be installed before the R packages are installed (use package manager of choice for your system)
+
+Once these dependencies are installed several packages are required. For installing all packages use:
+```R
+install.packages("devtools")
+library(devtools)
+Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
+devtools::install_github("samuelgerber/utmR")
+```
+
+This will install:
 - R packages (Packages folder contains a script to install all):
-  - gmra
-  - mop, gmra (contained in this repository)
+  - [mop](https://github.com/samuelgerber/mop)
+  - [gmra](https://github.com/samuelgerber/mop)
+  - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
   - data.table
   - lmvar
   - mmand
@@ -124,16 +136,6 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - pracma
   - yaml
   - ANTsR (requires devtools which depends on curl and git development libraries)
-
-In the Packages subfolder in Scripts are scripts to install all these packages
-(in particular install-all.sh). If that script fails due to not able to write
-into the R library directory install a package manually from R in order to
-create a local lib directory (start R, run install.packages("optparse") )
-
-### Visualization
-- R
-- R packages:
-  - optparse
   - shiny
   - shinyBS
   - shinythemes
@@ -142,8 +144,7 @@ create a local lib directory (start R, run install.packages("optparse") )
   - broom
   - corrplot
   - shinyWidgets
-- R remote packages: 
-  - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
+
 
 
 # Older Analysis Results
