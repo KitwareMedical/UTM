@@ -25,7 +25,7 @@ For both approaches different statistical analysis are available:
   - PCA: Principal component based statistical models
   - SpatCA: Spatially regularized component based statistical models 
     ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
-- **Parcelation based analysis**<br/>
+- **Parcellation based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
 
 The component and parcel based analysis visualization provide several options
