@@ -144,6 +144,7 @@ This will install:
   - broom
   - corrplot
   - shinyWidgets
+  - DT
 
 
 
