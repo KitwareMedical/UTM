@@ -2,39 +2,42 @@
 ![UTM Example](Figures/UTM-3D-example.png )
 ![UTM Example](Figures/UTM-3D-example-2.png )
 
-This is a repository that contains scripts to run volmetric population analysis
+This is a repository that contains scripts to run volumetric population analysis
 on brain image data sets.  For a general introduction see 
 [Brain morphometry](https://en.wikipedia.org/wiki/Brain_morphometry).
 
 The analysis pipeline contains an optimal transport feature extraction step and can 
-perfrom VBM and TBM with and without optimal transport features. The scripts 
-perfrom preprocessing, feature extraction and different statistical model.s 
+perform VBM and TBM with and without optimal transport features. The scripts 
+perform preprocessing, feature extraction and different statistical model. 
 
-The scripts perfrom feature extraction using:
+The scripts perform feature extraction using:
 - Standard and modified VBM approaches 
   ([VBM](https://en.wikipedia.org/wiki/Voxel-based_morphometry))
-- A novel approach based on optimal tansport 
-  ([UTM](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6547365/)) that aims to mitgiate some concerns with VBM.
+- A novel approach based on optimal transport 
+  ([UTM](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6547365/)) that aims to mitigate some concerns with VBM/TBM.
 
-For both approaches different statistical analysises are available:
+For both approaches different statistical analysis are available:
 
 - **Voxel based correlation analysis**: Correlation of individual voxels<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM/)
 - **Component based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Components/)
-  - PCA: Principal compnent based statistical models
-  - SpatCA: Spatially regularized compnent based statsitical models 
+  - PCA: Principal component based statistical models
+  - SpatCA: Spatially regularized component based statistical models 
     ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
 - **Parcelation based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
 
-The compnent and parcel based analysis visualization provide several options for statsitical models
-and custom statistical models can be incorporated through R scripting within the shiny user interface.
+The component and parcel based analysis visualization provide several options
+for statistical models and custom statistical models can be incorporated
+through R scripting within the shiny user interface.
 
-Depending on the feature extraction (VBM or UTM) the results have slightly different interpretations.
+Depending on the feature extraction (with or without optimal transport
+features) the results have slightly different interpretations.
 
-If you are interested in using only the optimal transport feature extraction step in your own analysis
-pipleine have a look at the R package [OTFeatures](https://github.com/samuelgerber/OTFeatures).
+If you are interested in using only the optimal transport feature extraction
+step in your own analysis pipeline have a look at the R package
+[OTFeatures](https://github.com/samuelgerber/OTFeatures).
 
 
 ## References 
@@ -52,7 +55,7 @@ The spatial component analysis approach is described in:
 > International Conference on Medical Image Computing and Computer-Assisted Intervention 2020  
 > [Link](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
 
-This paper also describes the statistical model employed in the parcel and compnent based analysis,
+This paper also describes the statistical model employed in the parcel and component based analysis,
 
 
 
@@ -66,7 +69,7 @@ There are three stages to running the scripts:
 3. Visualization of results
    - See Scripts/Shiny
 
-For a more detailed description see the documentatio in [doc folder](doc).
+For a more detailed description see the documentation in [doc folder](doc).
 
 
 ### Examples
@@ -75,7 +78,8 @@ To run the examples install the [requirements](#requirements-to-run-scripts) fir
 
 For a self contained example see  
 [run-example.py](python/run-example.py)  
-The example preprocesses a set of images and passes the preprocessed images to the analysis script.
+The example processes a set of images, saves pre-processed images 
+and passes the pre-processed images to the analysis script.
 
 For a toy example see [Example/Annulus](Example/Annulus)
 
@@ -104,7 +108,7 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
 ### Analysis Steps
 - R >= 3.6
 - R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
-  - These need to be onstalled before the R packages are installed (use package manager of choice for your system)
+  - These need to be installed before the R packages are installed (use package manager of choice for your system)
 - R packages (Packages folder contains a script to install all):
   - gmra
   - mop, gmra (contained in this repository)
@@ -119,7 +123,7 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - optparse
   - pracma
   - yaml
-  - ANTsR (requires devtools which depends on curl and git devel libraries)
+  - ANTsR (requires devtools which depends on curl and git development libraries)
 
 In the Packages subfolder in Scripts are scripts to install all these packages
 (in particular install-all.sh). If that script fails due to not able to write
@@ -142,18 +146,8 @@ create a local lib directory (start R, run install.packages("optparse") )
   - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
 
 
-## Older Version
-
-An older version that was used for the MICCAI 2018
-[Unbalanced Optimal Transport for Exploratory Population Analysis](https://github.com/KitwareMedicalPublications/2018-MICCAI-UTM)
-can be found in the Apps-Old folder.
-
-The processing pipeline has been signifcantly changed. To run the older
-examples from the paper you will ahve to use the correct paths to Scripts/Old
-to amke this work again.
-
 # Older Analysis Results
-Analysis result with older prototype application.
+Analysis result with an older prototype application.
 
 ## OASIS-1 data set
 Data Set: https://www.oasis-brains.org/#oasis1
