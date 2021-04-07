@@ -123,7 +123,8 @@ Or use the [install-all.sh](./Scripts/Packages) shell script.
 This will install:
 - R packages (Packages folder contains a script to install all):
   - [mop](https://github.com/samuelgerber/mop)
-  - [gmra](https://github.com/samuelgerber/mop)
+  - [gmra](https://github.com/samuelgerber/gmra)
+  - [msr](https://github.com/samuelgerber/msr)
   - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
   - data.table
   - lmvar
