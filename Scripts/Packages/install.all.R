@@ -20,7 +20,8 @@ install.packages( c("optparse",
                     "shinyWidgets",
                     "shinythemes",
                     "shinyBS",
-                    "yaml"
+                    "yaml",
+                    "DT"
                     ),
                    repos='http://cran.us.r-project.org'
                  )
