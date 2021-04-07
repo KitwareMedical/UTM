@@ -130,6 +130,7 @@ This will install:
   - mmand
   - Rtsne
   - stringr
+  - glmnet
   - foreach
   - doParallel
   - RColorBrewer
