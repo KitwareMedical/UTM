@@ -55,7 +55,7 @@ The spatial component analysis approach is described in:
 > International Conference on Medical Image Computing and Computer-Assisted Intervention 2020  
 > [Link](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
 
-This paper also describes the statistical model employed in the parcel and component based analysis,
+This paper also describes the statistical model employed in the parcel and component based analysis.
 
 
 
