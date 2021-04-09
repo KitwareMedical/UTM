@@ -105,6 +105,21 @@ cd ..
 mkdir OASIS-1-Results
 python3 run-oasis-1.py --input_folder ./OASIS-1 --input_cs ./OASIS-1/oasis_cross-sectional.csv --output_folder ./OASIS-1-Results
 ```
+This will create itermediate images in OASIS-1-Results and analysis outputs in OASIS-1-Results/results. The analysis runs 
+white matter, gray matter with affine and with diffeomoprhic registration to the SRI24 atlas.
+To visualize the results copy [app.R](./Scripts/Shiny/app.R), [render.js](./Scripts/ShinyVtkScripts/render.js),
+[shiny-help.md](Scripts/Shiny/shiny-help.md) and [atlas.Rdata](Atlas/sri24/labels/atlas.Rdata) into the OASIS-1-Results/results/gray
+and run the sniny app:
+```
+cp ./Scripts/Shiny/app.R OASIS-1-Results/results/gray
+cp ./Scripts/ShinyVtkScripts/render.js OASIS-1-Results/results/gray
+cp ./Atlas/sri24/labels/atlas.Rdata OASIS-1-Results/results/gray
+cp ./Scripts/Shiny/shiny-help.md OASIS-1-Results/results/gray
+cd OASIS-1-Results/results/gray
+Rscript app.R
+```
+For visualizing parcel or component results copy [app.R](./Scripts/ShinyParcels/app.R) or [app.R](./Scripts/ShinyComponents/app.R) instead.
+For visualizing results on white matter or different registration repeat above steps OASIS-1-Results/results/white or appropriate folder in OASIS-1-Results/results.
 
 ## Visualization of the Results
 The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
