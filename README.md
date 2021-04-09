@@ -109,7 +109,7 @@ This will create itermediate images in OASIS-1-Results and analysis outputs in O
 white matter, gray matter with affine and with diffeomoprhic registration to the SRI24 atlas.
 To visualize the results copy [app.R](./Scripts/Shiny/app.R), [render.js](./Scripts/ShinyVtkScripts/render.js),
 [shiny-help.md](Scripts/Shiny/shiny-help.md) and [atlas.Rdata](Atlas/sri24/labels/atlas.Rdata) into the OASIS-1-Results/results/gray
-and run the sniny app:
+and run the shiny app:
 ```
 cp ./Scripts/Shiny/app.R OASIS-1-Results/results/gray
 cp ./Scripts/ShinyVtkScripts/render.js OASIS-1-Results/results/gray
