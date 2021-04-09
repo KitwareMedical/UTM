@@ -74,17 +74,40 @@ For a more detailed description see the documentation in [doc folder](doc).
 
 ### Examples
 
-To run the examples install the [requirements](#requirements-to-run-scripts) first 
+To run the examples install the [requirements](#install) first 
 
+#### Small Image Exaple Data Set
 For a self contained example see  
 [run-example.py](python/run-example.py)  
 The example processes a set of images, saves pre-processed images 
 and passes the pre-processed images to the analysis script.
+To run in shell in the [python](./python) folder run:
+```
+python3 run-example.py
+```
 
+#### Toy Example Data Set
 For a toy example see [Example/Annulus](Example/Annulus)
+To run in a shell in the  [Example/Annulus](Example/Annulus) folder:
+```
+source run.sh
+cd Results
+Rscript app.R
+```
+
+#### OASIS-1 Data Set
 
 For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
 [run-oasis-1.py](python/run-oasis-1.py)
+To run in shell in the [python](./python) folder run:
+```
+mkdir OASIS-1
+cd OASIS-1
+python3 ../download-oasis-1.py
+cd ..
+mkdir OASIS-1-Results
+python3 run-oasis-1.py --input_folder ./OASIS-1 --input_cs ./OASIS-1/oasis_cross-sectional.csv --output_folder ./OASIS-1-Results
+```
 
 ## Visualization of the Results
 The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
