@@ -110,7 +110,8 @@ python3 run-oasis-1.py --input_folder ./OASIS-1 --input_cs ./OASIS-1/oasis_cross
 The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
  - [Shiny](./Scripts/Shiny/app.R)
  - [ShinyParcels](./Scripts/ShinyParcels/app.R)
- - [ShinyComponents](./Scripts/ShinyComponents/app.R)
+ - [ShinyComponents](./Scripts/ShinyComponents/app.R)  
+ 
 Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files from the output of the main script.
 
 ## Install
