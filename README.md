@@ -77,18 +77,17 @@ For a more detailed description see the documentation in [doc folder](doc).
 To run the examples install the [requirements](#install) first 
 
 #### Small Image Data Set
-For a self contained example see  
-[run-example.py](python/run-example.py)  
+For a self contained example see [run-example.py](python/run-example.py).  
 The example processes a set of images, saves pre-processed images 
 and passes the pre-processed images to the analysis script.
-To run in shell in the [python](./python) folder run:
+From console in the [python](./python) folder run:
 ```
 python3 run-example.py
 ```
 
 #### Toy Data Set
-For a toy example see [Example/Annulus](Example/Annulus)
-To run in a shell in the  [Example/Annulus](Example/Annulus) folder:
+For a toy example see [Example/Annulus](Example/Annulus).  
+From console in the [Example/Annulus](Example/Annulus) folder:
 ```
 source run.sh
 cd Results
@@ -96,9 +95,8 @@ Rscript app.R
 ```
 
 #### OASIS-1 Data Set
-For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
-[run-oasis-1.py](python/run-oasis-1.py)
-To run in shell in the [python](./python) folder run:
+For an example on the [OASIS-1 data set](https://www.oasis-brains.org/) see [run-oasis-1.py](python/run-oasis-1.py).  
+From console in the [python](./python) folder run:
 ```
 mkdir OASIS-1
 cd OASIS-1
