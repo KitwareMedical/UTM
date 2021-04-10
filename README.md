@@ -111,10 +111,10 @@ To visualize the results copy [app.R](./Scripts/Shiny/app.R), [render.js](./Scri
 [shiny-help.md](Scripts/Shiny/shiny-help.md) and [atlas.Rdata](Atlas/sri24/labels/atlas.Rdata) into the OASIS-1-Results/results/gray
 and run the shiny app:
 ```
-cp ./Scripts/Shiny/app.R OASIS-1-Results/results/gray
-cp ./Scripts/ShinyVtkScripts/render.js OASIS-1-Results/results/gray
-cp ./Atlas/sri24/labels/atlas.Rdata OASIS-1-Results/results/gray
-cp ./Scripts/Shiny/shiny-help.md OASIS-1-Results/results/gray
+cp ../Scripts/Shiny/app.R OASIS-1-Results/results/gray
+cp ../Scripts/ShinyVtkScripts/render.js OASIS-1-Results/results/gray
+cp ../Atlas/sri24/labels/atlas.Rdata OASIS-1-Results/results/gray
+cp ../Scripts/Shiny/shiny-help.md OASIS-1-Results/results/gray
 cd OASIS-1-Results/results/gray
 Rscript app.R
 ```
