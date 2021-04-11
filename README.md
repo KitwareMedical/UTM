@@ -42,9 +42,9 @@ step in your own analysis pipeline have a look at the R package
 
 ## References 
 The analysis approach is based on the work in:
-> Gerber S, Niethammer M, Styner M, Aylward S. 
-> Exploratory Population Analysis with Unbalanced Optimal Transport. 
-> Med Image Comput Comput Assist Interv. 2018  
+> Gerber S, Niethammer M, Styner M, Aylward S.  
+> Exploratory Population Analysis with Unbalanced Optimal Transport.  
+> Med Image Comput Comput Assist Interv. 2018   
 > [Pubmed Link](https://pubmed.ncbi.nlm.nih.gov/31172134/)
 
 A journal article with improvements and additions to the method is in progress.
