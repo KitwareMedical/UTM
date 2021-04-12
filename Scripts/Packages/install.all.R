@@ -21,7 +21,8 @@ install.packages( c("optparse",
                     "shinythemes",
                     "shinyBS",
                     "yaml",
-                    "raster"
+                    "raster",
+                    "DT"
                     ),
                    repos='http://cran.us.r-project.org'
                  )
@@ -34,4 +35,5 @@ library( devtools )
 install_github("stnava/ANTsR")
 
 install_github("samuelgerber/vtkwidgets")
+install_github("samuelgerber/msr")
 

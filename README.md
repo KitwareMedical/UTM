@@ -8,7 +8,7 @@ on brain image data sets.  For a general introduction see
 
 The analysis pipeline contains an optimal transport feature extraction step and can 
 perform VBM and TBM with and without optimal transport features. The scripts 
-perform preprocessing, feature extraction and different statistical model. 
+perform preprocessing, feature extraction, analysis and visualization. 
 
 The scripts perform feature extraction using:
 - Standard and modified VBM approaches 
@@ -25,7 +25,7 @@ For both approaches different statistical analysis are available:
   - PCA: Principal component based statistical models
   - SpatCA: Spatially regularized component based statistical models 
     ([SpatCA](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65))
-- **Parcelation based analysis**<br/>
+- **Parcellation based analysis**<br/>
   [Example result visualization](https://sg-kitware.shinyapps.io/OASIS-1-GM-Parcels/)
 
 The component and parcel based analysis visualization provide several options
@@ -42,9 +42,9 @@ step in your own analysis pipeline have a look at the R package
 
 ## References 
 The analysis approach is based on the work in:
-> Gerber S, Niethammer M, Styner M, Aylward S. 
-> Exploratory Population Analysis with Unbalanced Optimal Transport. 
-> Med Image Comput Comput Assist Interv. 2018  
+> Gerber S, Niethammer M, Styner M, Aylward S.  
+> Exploratory Population Analysis with Unbalanced Optimal Transport.  
+> Med Image Comput Comput Assist Interv. 2018   
 > [Pubmed Link](https://pubmed.ncbi.nlm.nih.gov/31172134/)
 
 A journal article with improvements and additions to the method is in progress.
@@ -55,7 +55,7 @@ The spatial component analysis approach is described in:
 > International Conference on Medical Image Computing and Computer-Assisted Intervention 2020  
 > [Link](https://link.springer.com/chapter/10.1007/978-3-030-59728-3_65)
 
-This paper also describes the statistical model employed in the parcel and component based analysis,
+This paper also describes the statistical model employed in the parcel and component based analysis.
 
 
 
@@ -74,26 +74,63 @@ For a more detailed description see the documentation in [doc folder](doc).
 
 ### Examples
 
-To run the examples install the [requirements](#requirements-to-run-scripts) first 
+To run the examples install the [requirements](#install) first 
 
-For a self contained example see  
-[run-example.py](python/run-example.py)  
+#### Small Image Data Set
+For a self contained example see [run-example.py](python/run-example.py).  
 The example processes a set of images, saves pre-processed images 
 and passes the pre-processed images to the analysis script.
+From console in the [python](./python) folder run:
+```
+python3 run-example.py
+```
 
-For a toy example see [Example/Annulus](Example/Annulus)
+#### Toy Data Set
+For a toy example see [Example/Annulus](Example/Annulus).  
+From console in the [Example/Annulus](Example/Annulus) folder:
+```
+source run.sh
+cd Results
+Rscript app.R
+```
 
-For an example on the [OASIS-1 data set](https://www.oasis-brains.org/)  
-[run-oasis-1.py](python/run-oasis-1.py)
+#### OASIS-1 Data Set
+For an example on the [OASIS-1 data set](https://www.oasis-brains.org/) see [run-oasis-1.py](python/run-oasis-1.py).  
+From console in the [python](./python) folder run:
+```
+mkdir OASIS-1
+cd OASIS-1
+python3 ../download-oasis-1.py
+cd ..
+mkdir OASIS-1-Results
+python3 run-oasis-1.py --input_folder ./OASIS-1 --input_cs ./OASIS-1/oasis_cross-sectional.csv --output_folder ./OASIS-1-Results
+```
+This will create itermediate images in OASIS-1-Results and analysis outputs in OASIS-1-Results/results. The analysis runs 
+white matter, gray matter with affine and with diffeomoprhic registration to the SRI24 atlas.
+To visualize the results copy [app.R](./Scripts/Shiny/app.R), [render.js](./Scripts/ShinyVtkScripts/render.js),
+[shiny-help.md](Scripts/Shiny/shiny-help.md) and [atlas.Rdata](Atlas/sri24/labels/atlas.Rdata) into the OASIS-1-Results/results/gray
+and run the shiny app:
+```
+cp ../Scripts/Shiny/app.R OASIS-1-Results/results/gray
+cp ../Scripts/ShinyVtkScripts/render.js OASIS-1-Results/results/gray
+cp ../Atlas/sri24/labels/atlas.Rdata OASIS-1-Results/results/gray
+cp ../Scripts/Shiny/shiny-help.md OASIS-1-Results/results/gray
+cd OASIS-1-Results/results/gray
+Rscript app.R
+```
+For visualizing parcel or component results copy [app.R](./Scripts/ShinyParcels/app.R) or [app.R](./Scripts/ShinyComponents/app.R) instead.
+For visualizing results on white matter or different registration repeat above steps OASIS-1-Results/results/white or appropriate folder in OASIS-1-Results/results.
 
 ## Visualization of the Results
 The results are visualzed with [Shiny](https://shiny.rstudio.com/) applications in the folders
  - [Shiny](./Scripts/Shiny/app.R)
  - [ShinyParcels](./Scripts/ShinyParcels/app.R)
- - [ShinyComponents](./Scripts/ShinyComponents/app.R)
+ - [ShinyComponents](./Scripts/ShinyComponents/app.R)  
+ 
 Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files from the output of the main script.
 
-## Requirements to Run Scripts
+## Install
+Requirements to Run Scripts
 
 ### Preprocessing
 - python 3
@@ -105,18 +142,32 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - nibabel
   - dipy
 
-### Analysis Steps
+### Analysis
 - R >= 3.6
 - R packages dependencies: x11, gl/glu, libpng, curl, git dev libraries
   - These need to be installed before the R packages are installed (use package manager of choice for your system)
+
+Once these dependencies are installed several packages are required. For installing all packages use:
+```R
+install.packages("devtools")
+library(devtools)
+Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
+devtools::install_github("samuelgerber/utmR")
+```
+Or use the [install-all.sh](./Scripts/Packages) shell script.
+
+This will install:
 - R packages (Packages folder contains a script to install all):
-  - gmra
-  - mop, gmra (contained in this repository)
+  - [mop](https://github.com/samuelgerber/mop)
+  - [gmra](https://github.com/samuelgerber/gmra)
+  - [msr](https://github.com/samuelgerber/msr)
+  - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
   - data.table
   - lmvar
   - mmand
   - Rtsne
   - stringr
+  - glmnet
   - foreach
   - doParallel
   - RColorBrewer
@@ -124,16 +175,6 @@ Each folder contains a *upload.to.shinyapps.R* for bundling of relevant files fr
   - pracma
   - yaml
   - ANTsR (requires devtools which depends on curl and git development libraries)
-
-In the Packages subfolder in Scripts are scripts to install all these packages
-(in particular install-all.sh). If that script fails due to not able to write
-into the R library directory install a package manually from R in order to
-create a local lib directory (start R, run install.packages("optparse") )
-
-### Visualization
-- R
-- R packages:
-  - optparse
   - shiny
   - shinyBS
   - shinythemes
@@ -142,8 +183,8 @@ create a local lib directory (start R, run install.packages("optparse") )
   - broom
   - corrplot
   - shinyWidgets
-- R remote packages: 
-  - [vtkwidgets](https://github.com/samuelgerber/vtkwidgets)
+  - DT
+
 
 
 # Older Analysis Results
