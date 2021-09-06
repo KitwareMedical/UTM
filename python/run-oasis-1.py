@@ -66,6 +66,7 @@ def process_one(row):
   im_seg_warp = ants.apply_transforms( fixed=im_atlas, moving=im_seg,
                                          transformlist=tx )
   ants.image_write( im_seg_warp, args.out_segmentation )
+  # This OVERWRITES the ants prior based segementation that got saved in standard_ants_preprocessing call above, right? -e
 
 
   ## Extract and modulate by jacobian for warped segmentation
@@ -77,7 +78,7 @@ def process_one(row):
   #csf matter
   args2.segmentation_id = "1"
   args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["csf"], patient_id )
+          preprocess_folders["csf"], patient_id ) # How is this not a KeyError? There's no "csf" key.
   feature_input.create_feature_input( args2 )
 
   #grey matter
@@ -188,10 +189,13 @@ output_folder = args.output_folder
 preprocess_folders = {
  "white" : "{0}/white".format(output_folder),
  "gray"  : "{0}/gray".format(output_folder),
+ "csf"  : "{0}/csf".format(output_folder),
  "white_affine" : "{0}/white_affine".format(output_folder),
  "gray_affine"  : "{0}/gray_affine".format(output_folder),
+ "csf_affine"  : "{0}/csf_affine".format(output_folder),
  "white_oasis" : "{0}/white_oasis".format(output_folder),
  "gray_oasis"  : "{0}/gray_oasis".format(output_folder),
+ "csf_oasis"  : "{0}/csf_oasis".format(output_folder),
 }
 
 intermediate_folders = {

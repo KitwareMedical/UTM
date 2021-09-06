@@ -125,7 +125,7 @@ analysis:
     lambda.pos: 0.001
     #negative regularization term
     lambda.neg: 0.5
-    #number of iterationms
+    #number of iterations
     n.iters: 5
     #step size per iteratiom
     step: 0.1
@@ -143,7 +143,7 @@ analysis:
     pLevelP: 0.2
 
 report:
-  use: OFF
+  use: OFF # Warning: Enabling this may cause legacy code in run.utm.barycenter.R to execute
   #p-value threshold for generating images in report
   threshold: 0.05
   #Extract slice for report at location x [between 0 and 1]
