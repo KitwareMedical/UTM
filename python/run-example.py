@@ -63,6 +63,9 @@ def main():
   os.system( "Rscript ../Scripts/run.utm.barycenter.R {0} {1}"
               " --working.folder ./example/results"
               " --config example.yaml".format(preprocess_folder, csv_out_file ) )
+  # For convenience here's that command in this example situation:
+  # Rscript ../Scripts/run.utm.barycenter.R ./example/preprocessed-input-data ./example/data.csv --working.folder ./example/results --config example.yaml
+  # exit()
 
   #Run shiny voxel based visualization
   os.system( "cp ../Scripts/Shiny/* ./example/results" )

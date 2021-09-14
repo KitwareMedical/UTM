@@ -19,7 +19,7 @@ load(config$variablesfile)
 foreach(name = file.names) %dopar% {
   tryCatch({
     system2( "Rscript", c(sprintf("%s/Processing/unbalanced.transport.R", config$script.folder),
-                  config$transport$cost,
+                  config$transport$cost, # Confusingly, this is allocation cost, not "transport cost" -e
                   config$transport$massbalancing,
                   config$transport$gmrafolder,
                   config$barycenters$file,

@@ -84,18 +84,17 @@ run.script <- function(script.file, message, current.start, current.end){
   tryCatch({
     update.progress( message, 100, current.start, config$progresspipe )
     script = sprintf("%s/%s --config %s", script.folder, script.file, r.config)
-    ret.value = system2("Rscript", script)
+    ret.value = system2("Rscript", script) # e.g. Rscript ../Scripts/Analysis/analyse.images.cor.R --config configuration.Rdata
     if( ret.value > 0 ){
       stop( ret.value )
     }
     update.progress( sprintf("%s - Done", message), 100, current.end, config$progresspipe )
-    },
-    error = function(e){
-      print(e)
-      update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
-      update.progress( e$message, 100, current.end, config$progresspipe)
-    }
-  )
+  },
+  error = function(e){
+    print(e)
+    update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
+    update.progress( e$message, 100, current.end, config$progresspipe)
+  })
 }
 
 ### Run thorugh pipeline
@@ -104,6 +103,7 @@ run.script <- function(script.file, message, current.start, current.end){
 if( config$setup$use ){
   run.script("Processing/setup.R", "Setup", 0, 5)
 }
+# quit()
 load(config$variablesfile)
 
 #Compute multiscale representations if transport is used

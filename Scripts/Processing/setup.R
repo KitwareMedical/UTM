@@ -21,7 +21,7 @@ vars <- read.table(var.table, sep=",", header=TRUE)
 
 im.mean = NULL
 to.orig.index <- c()
-index <- 1
+index <- 1 # This seems to be not used anywhere. -e
 im.counts = NULL
 names <- c()
 for( i in 1:length(vars$name) ){
@@ -57,7 +57,7 @@ for( i in 1:length(vars$name) ){
   names  <- append(names, name)
   save( x, x.weights, file = sprintf( "%s/%s.Rdata", points.folder, name) )
   to.orig.index <- c(to.orig.index, i)
-  index <- index+1
+  index <- index+1 # This seems to be not used anywhere. -e
 
 }
 
@@ -73,7 +73,7 @@ sum.mean = sum(im.mean)
 index <- which(im.counts < mean.sparsity * n  )
 #im.mean[ im.mean < mean( im.mean[im.mean > 0] ) * 0.1 ] = 0
 im.mean[index] <- 0
-im.mean <- im.mean / sum(im.mean) * sum.mean
+im.mean <- im.mean / sum(im.mean) * sum.mean # Dividing then multiplying like this does nothing, right? Fix? -e
 x <- which(im.mean > 0, arr.ind = TRUE )
 m.gmra = gmra.create.ikm(X = x, eps = 0, nKids=4, stop=3)
 gmra.save.tree( m.gmra, barycenter.euclidean.gmra.file)

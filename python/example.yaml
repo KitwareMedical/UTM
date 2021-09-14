@@ -65,7 +65,7 @@ transport:
   #Cost effectively acts as a radius for within
   #transportation is prefered to mass allocation
   cost: 0
-  degree: 2
+  degree: 2 # Should document what this is! The 2 indicates that we are using _squared_ euclidean distance for transport cost. -e
 
 #Features to compute
 features:

@@ -7,10 +7,10 @@ def standard_ants_preprocessing(args):
   im = ants.image_read( args.image )
   atlas = ants.image_read( args.atlas )
 
-  print("Runnning N4 Bias Correction")
+  print("Runnning N4 Bias Correction:",args.image)
   im_n4 = ants.n4_bias_field_correction( im )
 
-  print("Runnning Registration")
+  print("Runnning Registration:", args.image)
 
   reg = ants.registration(atlas, im_n4, type_of_transform="SyN", outprefix=args.out_tx)
   im_warped = reg['warpedmovout']
@@ -18,6 +18,9 @@ def standard_ants_preprocessing(args):
 
   jac = ants.create_jacobian_determinant_image(atlas, reg['fwdtransforms'][0],False,True)
   ants.image_write( jac.apply(np.abs), args.out_jac_image )
+  # I believe np.abs is not needed because we jac is actually the absolute value of the true jacobian det.
+  # See the C++ ants repo: ANTs/Utilities/itkGeometricJacobianDeterminantImageFilter.hxx:
+  # GeometricJacobianDeterminantImageFilter< TInputImage, TRealType, TOutputImage >::ThreadedGenerateData
 
   print("Creating Mask")
   priors = [
@@ -25,6 +28,9 @@ def standard_ants_preprocessing(args):
              ants.image_read( args.atlas_grey ),
              ants.image_read( args.atlas_white )
            ]
+
+  # Take the union of the CSF, grey matter, and white matter segmentation labels
+  # We will restrict segmentation to this region
   mask = priors[0].copy()
   mask_view = mask.view()
   for i in range(1, len(priors)):
@@ -32,7 +38,7 @@ def standard_ants_preprocessing(args):
   mask_view[mask_view > 0] = 1
   ants.image_write( mask, "mask.nii")
 
-  print("Runnning Segmentation")
+  print("Runnning Segmentation:",args.image)
   seg = ants.prior_based_segmentation( im_warped, priors, mask )
 
   ants.image_write( seg['segmentation'], args.out_segmentation )

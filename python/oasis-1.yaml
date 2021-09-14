@@ -58,7 +58,7 @@ transport:
   #    4 - Free (Add or subtract mass anywhere)
   #    5 - Free source only (Add or subtract mass in source only)
   massbalancing: 3
-  #Cost for adding mass, this adds a trade of between
+  #Cost for adding mass, this adds a trade off between
   #transporting mass or adding mass
   #thus mass is only transported if it is cheaper
   #than allocation or removing mass
