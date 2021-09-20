@@ -277,7 +277,9 @@ get.max.cor <- function(variable){
 
 
 plot.slice <- function(variable, feature, maxcor, transparency,
-                       threshold, background, slice, axis, anatomy="All"){
+                       thresholdStr, background, slice, axis, anatomy="All"){
+
+  threshold <- as.double(thresholdStr)
 
   useAtlas <- anatomy != "All" & !is.null(atlas)
 
