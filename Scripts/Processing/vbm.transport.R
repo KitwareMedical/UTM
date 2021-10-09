@@ -117,9 +117,10 @@ foreach(i=1:length(vars$name), .combine="+",
 
   if(sigma > 0 ){
     val = as.integer(3*sigma)
-    val = val + !(val%%2)
+    val = val + !(val%%2) # Make val odd by incrementing if it's even
 
-    mask = erode( abs( vbm ) < 10^-10, array(1, dim=rep(val,d) ) )
+    # array(1, dim=rep(val,d) ) is a (val x val x ... x val) sized kernel full of 1's 
+    mask = erode( abs( vbm ) < 10^-10, array(1, dim=rep(val,d) ) ) 
     vbm = gaussianSmooth( vbm,  rep(sigma,d) )
     vbm[mask > 0] = 0
 
