@@ -76,10 +76,10 @@ def process_one(row):
   args2.downsample = 2
 
   #csf matter
-  args2.segmentation_id = "1"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["csf"], patient_id ) # How is this not a KeyError? There's no "csf" key.
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "1"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["csf"], patient_id ) # How is this not a KeyError? There's no "csf" key.
+#   feature_input.create_feature_input( args2 )
 
   #grey matter
   args2.segmentation_id = "2"
@@ -88,10 +88,10 @@ def process_one(row):
   feature_input.create_feature_input( args2 )
 
   #white matter
-  args2.segmentation_id = "3"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["white"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "3"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["white"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
 
   ## Extract for affine only
@@ -99,10 +99,10 @@ def process_one(row):
   args2.segmentation_image = affine_seg_fname
 
   #csf matter
-  args2.segmentation_id = "1"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["csf_affine"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "1"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["csf_affine"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
   #grey matter
   args2.segmentation_id = "2"
@@ -111,10 +111,10 @@ def process_one(row):
   feature_input.create_feature_input( args2 )
 
   #white matter
-  args2.segmentation_id = "3"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["white_affine"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "3"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["white_affine"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
 
   ## Extract for oasis segmentation / no registration
@@ -122,22 +122,22 @@ def process_one(row):
   args2.segmentation_image = segmentation_image_file
 
   #csf matter
-  args2.segmentation_id = "1"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["csf_oasis"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "1"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["csf_oasis"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
   #grey matter
-  args2.segmentation_id = "2"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["gray_oasis"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "2"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["gray_oasis"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
   #white matter
-  args2.segmentation_id = "3"
-  args2.out_image = "{0}/{1}.nii".format(
-          preprocess_folders["white_oasis"], patient_id )
-  feature_input.create_feature_input( args2 )
+#   args2.segmentation_id = "3"
+#   args2.out_image = "{0}/{1}.nii".format(
+#           preprocess_folders["white_oasis"], patient_id )
+#   feature_input.create_feature_input( args2 )
 
   row2 = row
   row2["name"] = "{0}.nii".format(patient_id)
@@ -187,15 +187,15 @@ output_folder = args.output_folder
 
 #Folders for different preprocessing options and intermediate images
 preprocess_folders = {
- "white" : "{0}/white".format(output_folder),
+#  "white" : "{0}/white".format(output_folder),
  "gray"  : "{0}/gray".format(output_folder),
- "csf"  : "{0}/csf".format(output_folder),
- "white_affine" : "{0}/white_affine".format(output_folder),
+#  "csf"  : "{0}/csf".format(output_folder),
+#  "white_affine" : "{0}/white_affine".format(output_folder),
  "gray_affine"  : "{0}/gray_affine".format(output_folder),
- "csf_affine"  : "{0}/csf_affine".format(output_folder),
- "white_oasis" : "{0}/white_oasis".format(output_folder),
- "gray_oasis"  : "{0}/gray_oasis".format(output_folder),
- "csf_oasis"  : "{0}/csf_oasis".format(output_folder),
+#  "csf_affine"  : "{0}/csf_affine".format(output_folder),
+#  "white_oasis" : "{0}/white_oasis".format(output_folder),
+#  "gray_oasis"  : "{0}/gray_oasis".format(output_folder),
+#  "csf_oasis"  : "{0}/csf_oasis".format(output_folder),
 }
 
 intermediate_folders = {
