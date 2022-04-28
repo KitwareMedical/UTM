@@ -1,3 +1,8 @@
+# Ensure png package is available
+if (!require('png', quiet=TRUE)) {
+  install.packages('png')
+}
+
 library(png, quietly=TRUE)
 library(shape, quietly=TRUE)
 library(ANTsR)
