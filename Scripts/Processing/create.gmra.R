@@ -13,5 +13,12 @@ if( !recompute & file.exists(gmra.file) ){
 }
 
 load( point.file )
+# We should now have loaded variables x, x.weights:
+# - x lists the locations of voxels with nonzero value from the original image file
+# - x.weights lists the corresponding values at those voxels
+if (!exists('x')) {
+  stop(sprintf("The file %s should have contained a list of points x",point.file))
+}
+
 gmra <- gmra.create.ikm(X = x, eps = 0, nKids=8, stop=3)
 gmra.save.tree( gmra, gmra.file )

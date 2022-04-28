@@ -31,6 +31,15 @@ registerDoParallel( cl )
 
 
 load( barycenter.file )
+# We should now have a list, barycenter, that contains data for the template image that was built out of the population.
+if (!exists('barycenter')) {
+  stop(sprintf("The file %s should have contained a list 'barycenter' describing the constructed template image", barycenter.file))
+}
+if (!("image" %in% names(barycenter))) {
+  stop(sprintf("The list 'barycenter' in %s should contain a named item 'image'", barycenter.file))
+}
+
+
 vars <- read.table(var.table, sep=",", header=TRUE)
 
 foreach(i=1:length(vars$name), .combine="+",

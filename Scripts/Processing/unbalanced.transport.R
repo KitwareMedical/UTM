@@ -23,8 +23,27 @@ if( !recompute & file.exists(trp.file) ){
 }
 
 load( barycenter.file )
+# We should now have a list, barycenter, that contains data for the template image that was built out of the population:
+# - barycenter$orig.image is the euclidean mean image
+# - barycenter$image is the sparse euclidean mean image
+# - barycenter$gmra.weights is a vector of voxel values of the sparse euclidean mean image, at the locations where that value is not zero
+# - barycenter$gmra.file is the location of the GMRA (geometric multiresolution analysis) file that contains the IKmeans tree
+#   (see https://github.com/samuelgerber/gmra/blob/d7e27ef6e80572f1f2d7694a07d518b8f104972b/src/gmra.cc#L181)
+if (!exists('barycenter')) {
+  stop(sprintf("The file %s should have contained a list 'barycenter' describing the constructed template image", barycenter.file))
+}
+if (!(("gmra.weights" %in% names(barycenter)) && ("gmra.file" %in% names(barycenter)))) {
+  stop(sprintf("The list 'barycenter' in %s should contain named items 'gmra.weights' and 'gmra.file'", barycenter.file))
+}
+
 #needed for point weights (x.weights)
 load( points.file )
+# We should now have loaded variables x, x.weights:
+# - x lists the locations of voxels with nonzero value from the original image file
+# - x.weights lists the corresponding values at those voxels
+if (!exists('x.weights')) {
+  stop(sprintf("The file %s should have contained a list of values x.weights", points.file))
+}
 
 trp.lp <- multiscale.transport.create.lp( oType = 31, transport.type=transport.type,
                                           massCost=massCost )

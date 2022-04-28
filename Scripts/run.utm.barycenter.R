@@ -94,6 +94,7 @@ run.script <- function(script.file, message, current.start, current.end){
       print(e)
       update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
       update.progress( e$message, 100, current.end, config$progresspipe)
+      quit()
     }
   )
 }

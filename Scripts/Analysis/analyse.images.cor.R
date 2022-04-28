@@ -48,6 +48,15 @@ cor.permutation.test <- function(y, x, n){
 }
 
 load( variables.path )
+if (!exists('file.names') || !exists('dims') || !exists('variables')) {
+  stop(sprintf("The file %s should have contained objects 'file.names', 'dims', and 'variables'",variables.path))
+}
+if (length(variables)<1) {
+  stop("The variables list should have at least one item to do correlation analysis. Make sure there is at least one feature column in the input data table.")
+}
+if (!( ('name' %in% names(variables[[1]])) && ('values' %in% names(variables[[1]])) && ('index' %in% names(variables[[1]])) )) {
+  stop("The variables list is not correctly formatted for doing correlation analysis.")
+}
 
 feature.folders <- list.dirs(features.folder, full.names=TRUE, recursive=FALSE)
 feature.names <- c()
