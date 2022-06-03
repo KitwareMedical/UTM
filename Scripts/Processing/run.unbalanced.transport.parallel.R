@@ -15,6 +15,9 @@ cl <- makeCluster( n.parallel )
 registerDoParallel( cl )
 
 load(config$variablesfile)
+if (!exists('file.names')) {
+  stop(sprintf("The file %s should have contained a list file.names of input file basenames",config$variablesfile))
+}
 
 foreach(name = file.names) %dopar% {
   tryCatch({

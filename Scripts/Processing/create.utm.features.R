@@ -14,6 +14,9 @@ sigma = config$features$utm$sigma
 n.parallel <- config$nparallel
 
 load(var.file)
+if (!exists('file.names') || !exists('dims')) {
+  stop(sprintf("The file %s should have contained objects 'file.names' and 'dims",var.file))
+}
 
 if(n.parallel < 1){
   n.parallel <- detectCores()

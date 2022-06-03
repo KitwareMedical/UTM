@@ -28,6 +28,19 @@ registerDoParallel( cl )
 
 
 load( barycenter.file )
+# We should now have a list, barycenter, that contains data for the template image that was built out of the population:
+# - barycenter$orig.image is the euclidean mean image
+# - barycenter$image is the sparse euclidean mean image
+# - barycenter$gmra.weights is a vector of voxel values of the sparse euclidean mean image, at the locations where that value is not zero
+# - barycenter$gmra.file is the location of the GMRA (geometric multiresolution analysis) file that contains the IKmeans tree
+#   (see https://github.com/samuelgerber/gmra/blob/d7e27ef6e80572f1f2d7694a07d518b8f104972b/src/gmra.cc#L181)
+if (!exists('barycenter')) {
+  stop(sprintf("The file %s should have contained a list 'barycenter' describing the constructed template image", barycenter.file))
+}
+if (!("image" %in% names(barycenter))) {
+  stop(sprintf("The list 'barycenter' in %s should contain a named item 'image'", barycenter.file))
+}
+
 vars <- read.table(var.table, sep=",", header=TRUE)
 
 foreach(i=1:length(vars$name), .combine="+",

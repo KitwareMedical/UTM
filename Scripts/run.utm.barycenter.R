@@ -89,12 +89,14 @@ run.script <- function(script.file, message, current.start, current.end){
       stop( ret.value )
     }
     update.progress( sprintf("%s - Done", message), 100, current.end, config$progresspipe )
-  },
-  error = function(e){
-    print(e)
-    update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
-    update.progress( e$message, 100, current.end, config$progresspipe)
-  })
+    },
+    error = function(e){
+      print(e)
+      update.progress( sprintf("%s - Failed", message), 100, current.end, config$progresspipe )
+      update.progress( e$message, 100, current.end, config$progresspipe)
+      quit()
+    }
+  )
 }
 
 ### Run thorugh pipeline
