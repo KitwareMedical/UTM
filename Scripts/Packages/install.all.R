@@ -11,7 +11,7 @@ install.packages( c("optparse",
                     "pracma",
                     "glmnet",
                     "shiny",
-                    "mmand"
+                    "mmand",
                     "shinyBS",
                     "broom",
                     "markdown",
