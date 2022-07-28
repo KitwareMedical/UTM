@@ -25,7 +25,7 @@ In each image, the outer annulus and the inner annulus will have some randomly c
 The default behavior is to keep the total mass constant from image to image, but
 to allow that mass to vary in its distribution between the outer vs inner annulus.
 After computing optimal transport features, this should produce transport cost images
-that detect the trade-off in mass that occurs between the inner and out annulus.
+that detect the trade-off in mass that occurs between the inner and outer annulus.
 Here is an example where we are correlating the transport cost feature with the mass of the outer annulus:
 
 ![example screenshot](shiny-example-case1.png)
@@ -36,7 +36,7 @@ will take longer to run but produce cleaner looking results.
 
 If the feature being correlated is changed to "allocation" instead of "transport," then we should see nothing in the correlation image.
 This is because no allocation is needed to achieve global mass balancing when the total masses are always the same.
-Commenting out [this line](https://github.com/KitwareMedical/UTM/blob/main/Example/Annulus/setup.discs3.R#L51)
+Commenting out [this line](https://github.com/KitwareMedical/UTM/blob/main/Example/Annulus/setup.discs3.R#L50)
 changes image generation so that the total mass is allowed to vary, with the masses of the inner and outer annuli varying independently.
 Then we can see a correlation of total mass to the allocation feature image:
 
