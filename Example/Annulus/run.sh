@@ -1,5 +1,6 @@
 IMAGES_PATH="./images"
 VAR_TABLE="./data.csv"
+RESULTS_PATH="Results"
 if [ ! -d "$IMAGES_PATH" ]; then
   mkdir $IMAGES_PATH
 fi
@@ -7,8 +8,8 @@ fi
 #Create ellipse images
 Rscript setup.discs.R $IMAGES_PATH $VAR_TABLE
 
-Rscript ../../Scripts/run.utm.barycenter.R $IMAGES_PATH $VAR_TABLE --working.folder "Results"
+Rscript ../../Scripts/run.utm.barycenter.R $IMAGES_PATH $VAR_TABLE --working.folder $RESULTS_PATH
 
-cp ../../Scripts/Shiny/app.R Results
-cp ../../Scripts/Shiny/shiny-help.md Results
-cp ../../Scripts/ShinyVtkScripts/render.js Results
+cp ../../Scripts/Shiny/app.R $RESULTS_PATH
+cp ../../Scripts/Shiny/shiny-help.md $RESULTS_PATH
+cp ../../Scripts/ShinyVtkScripts/render.js $RESULTS_PATH
