@@ -52,7 +52,7 @@ Correlation images of optimal transport features with `independent_measure` shou
 ## The p-value slider
 
 Note that the p-value threshold slider in the screenshots is chosen to be `0.00001`.
-This is chosen to be so small small in order to do multiple test correciton; it is a way of choosing p-value at each individual voxel so that the whole correlation image shows Bonferroni corrected p being less than 0.05.
+The reason it's chosen to be so small is multiple test correction; it is a way of choosing the p-value at each individual voxel so that the whole correlation image shows Bonferroni corrected p being less than 0.05.
 There are 3440 pixels in the annuli, so there are 3440 statistical tests being done here.
 Hence in order to get Bonferroni corrected p to be less than 0.05, we need to set the p threshold at each individual voxel to be
 `0.05 / 3440 = 0.000014535`. Setting the slider to `0.00001` is close enough.
