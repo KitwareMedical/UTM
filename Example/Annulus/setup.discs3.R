@@ -13,11 +13,10 @@ images.path <- args[1]
 var.table.file <- args[2]
 n=40
 
-outer = c()
-mass = c()
-mass1 = c()
-mass2 = c()
-independent.measure = c()
+total_mass = c()
+outer_mass = c()
+inner_mass = c()
+independent_measure = c()
 
 #create images
 for(i in 1:n){
@@ -47,23 +46,23 @@ for(i in 1:n){
   # will complain if it has only one "slice" to visualize, and this hack is easier than fixing the shiny app.
   im = readPNG("tmp.png")
 
-  # Comment out this line for Case 2 of figure. Leave it for Case 1 of figure.
+  # Comment out this line for Case 2 of the annulus figure in the paper. Uncomment for Case 1 of the figure.
   im = im/sum(im)
 
   # The m1, m2 here are the tissue densities of the outer and inner annli respectively, not the total masses of the annuli.
   # But they are proportional to total masses, with the proportionality constants (the respective annulus volumes) being
   # the same across all images. So it will not make a difference for the correlation analysis.
-  mass1 = c(mass1, m1)
-  mass2 = c(mass2, m2)
+  outer_mass = c(outer_mass, m1)
+  inner_mass = c(inner_mass, m2)
 
   # For total mass it does make a difference, so we use the image sum for total mass
   # (Note that the sum of densities m1+m2 is not in any sense "total mass", because the annuli have different volumes.)
-  mass = c(mass, sum(im))
+  total_mass = c(total_mass, sum(im))
 
   # Simulate a measure that is completely independent of of the OTF.
   # Looking at this helps verify that our multiple test correction is working properly,
   # i.e. that we are not getting too many false positives.
-  independent.measure = c(independent.measure, runif(1, 0.25, 0.75))
+  independent_measure = c(independent_measure, runif(1, 0.25, 0.75))
 
   imfile = sprintf("%s/annuli%04i.nrrd", images.path, i)
   antsImageWrite(as.antsImage(im), imfile)
@@ -71,10 +70,10 @@ for(i in 1:n){
 
 
 vars <- data.frame( name = sprintf("annuli%04i.nrrd", 1:n) )
-vars$mass1 = mass1
-vars$mass2 = mass2
-vars$mass = mass
-vars$independent.measure = independent.measure
+vars$outer_mass = outer_mass
+vars$inner_mass = inner_mass
+vars$total_mass = total_mass
+vars$independent_measure = independent_measure
 
 write.csv(vars, file=var.table.file, row.names=FALSE)
 

@@ -6,7 +6,7 @@ if [ ! -d "$IMAGES_PATH" ]; then
 fi
 
 #Create ellipse images
-Rscript setup.discs_wip.R $IMAGES_PATH $VAR_TABLE
+Rscript setup.discs3.R $IMAGES_PATH $VAR_TABLE
 
 Rscript ../../Scripts/run.utm.barycenter.R $IMAGES_PATH $VAR_TABLE --working.folder $RESULTS_PATH
 
