@@ -154,23 +154,13 @@ for (j in 1:length(cor.res)) {
   img_dir = file.path(save.path, res$name)
   dir.create(img_dir)
 
-  # Allocation
-  allocation_dir = file.path(img_dir, "allocation")
-  dir.create(allocation_dir)
-  writeNifti(res$im$allocation, sprintf("%s/correlation.nii.gz", allocation_dir))
-  writeNifti(res$pim$allocation, sprintf("%s/pvalue.nii.gz", allocation_dir))
-
-  # Transport
-  transport_dir = file.path(img_dir, "transport")
-  dir.create(transport_dir)
-  writeNifti(res$im$transport, sprintf("%s/correlation.nii.gz", transport_dir))
-  writeNifti(res$pim$transport, sprintf("%s/pvalue.nii.gz", transport_dir))
-
-  # VBM
-  vbm_dir = file.path(img_dir, "vbm")
-  dir.create(vbm_dir)
-  writeNifti(res$im$vbm, sprintf("%s/correlation.nii.gz", vbm_dir))
-  writeNifti(res$pim$vbm, sprintf("%s/pvalue.nii.gz", vbm_dir))
+  # Create each feature folders for each image
+  for (feature in c("allocation", "transport", "vbm")) {
+    feature_dir = file.path(img_dir, feature)
+    dir.create(feature_dir)
+    writeNifti(res$im[[feature]], sprintf("%s/correlation.nii.gz", feature_dir))
+    writeNifti(res$pim[[feature]], sprintf("%s/pvalue.nii.gz", feature_dir))
+  }
 }
 }
 
