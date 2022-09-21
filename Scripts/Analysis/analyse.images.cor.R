@@ -147,21 +147,20 @@ save(cor.res, file = save.file )
 
 # Write out images as nifti files
 library("RNifti")
-load("cor-vbm-utm.Rdata")
 for (j in 1:length(cor.res)) {
   res <- cor.res[[j]]
 
   # Allocation
-  writeNifti(res$im$allocation, sprintf("%s_allocation.nii.gz", res$name))
-  writeNifti(res$pim$allocation, sprintf("%s_allocation_pvalue.nii.gz", res$name))
+  writeNifti(res$im$allocation, sprintf("%s/%s_allocation.nii.gz", save.path, res$name))
+  writeNifti(res$pim$allocation, sprintf("%s/%s_allocation_pvalue.nii.gz", save.path, res$name))
 
   # Transport
-  writeNifti(res$im$transport, sprintf("%s_transport.nii.gz", res$name))
-  writeNifti(res$pim$transport, sprintf("%s_transport_pvalue.nii.gz", res$name))
+  writeNifti(res$im$transport, sprintf("%s/%s_transport.nii.gz", save.path, res$name))
+  writeNifti(res$pim$transport, sprintf("%s/%s_transport_pvalue.nii.gz", save.path, res$name))
 
   # VBM
-  writeNifti(res$im$vbm, sprintf("vbm.nii.gz", res$name))
-  writeNifti(res$pim$vbm, sprintf("vbm_pvalue.nii.gz", res$name))
+  writeNifti(res$im$vbm, sprintf("%s/%s_vbm.nii.gz", save.path, res$name))
+  writeNifti(res$pim$vbm, sprintf("%s/%s_vbm_pvalue.nii.gz", save.path, res$name))
 }
 }
 
