@@ -150,17 +150,27 @@ library("RNifti")
 for (j in 1:length(cor.res)) {
   res <- cor.res[[j]]
 
+  # Create img dir
+  img_dir = file.path(save.path, res$name)
+  dir.create(img_dir)
+
   # Allocation
-  writeNifti(res$im$allocation, sprintf("%s/%s_allocation.nii.gz", save.path, res$name))
-  writeNifti(res$pim$allocation, sprintf("%s/%s_allocation_pvalue.nii.gz", save.path, res$name))
+  allocation_dir = file.path(img_dir, "allocation")
+  dir.create(allocation_dir)
+  writeNifti(res$im$allocation, sprintf("%s/correlation.nii.gz", allocation_dir))
+  writeNifti(res$pim$allocation, sprintf("%s/pvalue.nii.gz", allocation_dir))
 
   # Transport
-  writeNifti(res$im$transport, sprintf("%s/%s_transport.nii.gz", save.path, res$name))
-  writeNifti(res$pim$transport, sprintf("%s/%s_transport_pvalue.nii.gz", save.path, res$name))
+  transport_dir = file.path(img_dir, "transport")
+  dir.create(transport_dir)
+  writeNifti(res$im$transport, sprintf("%s/correlation.nii.gz", transport_dir))
+  writeNifti(res$pim$transport, sprintf("%s/pvalue.nii.gz", transport_dir))
 
   # VBM
-  writeNifti(res$im$vbm, sprintf("%s/%s_vbm.nii.gz", save.path, res$name))
-  writeNifti(res$pim$vbm, sprintf("%s/%s_vbm_pvalue.nii.gz", save.path, res$name))
+  vbm_dir = file.path(img_dir, "vbm")
+  dir.create(vbm_dir)
+  writeNifti(res$im$vbm, sprintf("%s/correlation.nii.gz", vbm_dir))
+  writeNifti(res$pim$vbm, sprintf("%s/pvalue.nii.gz", vbm_dir))
 }
 }
 
