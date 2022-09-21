@@ -145,6 +145,24 @@ for(j in 1:length(variables)  ){
 
 save(cor.res, file = save.file )
 
+# Write out images as nifti files
+library("RNifti")
+load("cor-vbm-utm.Rdata")
+for (j in 1:length(cor.res)) {
+  res <- cor.res[[j]]
+
+  # Allocation
+  writeNifti(res$im$allocation, sprintf("%s_allocation.nii.gz", res$name))
+  writeNifti(res$pim$allocation, sprintf("%s_allocation_pvalue.nii.gz", res$name))
+
+  # Transport
+  writeNifti(res$im$transport, sprintf("%s_transport.nii.gz", res$name))
+  writeNifti(res$pim$transport, sprintf("%s_transport_pvalue.nii.gz", res$name))
+
+  # VBM
+  writeNifti(res$im$vbm, sprintf("vbm.nii.gz", res$name))
+  writeNifti(res$pim$vbm, sprintf("vbm_pvalue.nii.gz", res$name))
+}
 }
 
 suppressWarnings(
@@ -159,7 +177,3 @@ opt_parser = OptionParser( option_list=option_list,
 opts <- try( parse_args(opt_parser), silent=FALSE )
 load(opts$config)
 analysis.correlations(config)
-
-
-
-
