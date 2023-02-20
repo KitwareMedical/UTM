@@ -159,7 +159,7 @@ for (j in 1:length(cor.res)) {
     feature_dir = file.path(img_dir, feature)
     dir.create(feature_dir)
     writeNifti(res$im[[feature]], sprintf("%s/correlation.nii.gz", feature_dir))
-    writeNifti(res$pim[[feature]], sprintf("%s/pvalue.nii.gz", feature_dir))
+    writeNifti(1 - res$pim[[feature]], sprintf("%s/pvalue.nii.gz", feature_dir))
   }
 }
 }
