@@ -186,3 +186,6 @@ This will install:
   - DT
 
 
+## Acknowledgement
+
+This work was supported by the National Institute Of Mental Health of the National Institutes of Health under Award Number R42MH118845. The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.
